@@ -93,11 +93,24 @@
   <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
   <!-- Page level plugin JavaScript-->
   <script src="vendor/chart.js/Chart.min.js"></script>
-  <script src="vendor/datatables/jquery.dataTables.js"></script>
-  <script src="vendor/datatables/dataTables.bootstrap4.js"></script>
+  <script src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
   <!-- Custom scripts for all pages-->
   <script src="js/sb-admin.js"></script>
-  <!-- Custom scripts for this page-->
-  <script src="js/sb-admin-datatables.js"></script>
+  <script>
+  $(document).ready(function(){
+    $('#users').DataTable({
+        processing: true,
+        serverSide: true,
+        ajax: '/j',
+        columns: [
+            { data: 'id'},
+            { data: 'letter_number'},
+            { data: 'students.name'},
+            { data: 'company.company'},
+            { data: 'departure_date'}
+        ]
+    });
+  });
+  </script>
 </body>
 </html>

@@ -24,7 +24,6 @@ class HomeController extends Controller
      */
     public function index()
     {
-      $employee = Employees::all();
-      return view('home')->with('employee', $employee);
+      return view('home');
     }
 }

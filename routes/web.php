@@ -10,10 +10,8 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/', function()
-{
-  return view('welcome');
-});
+Route::get('/', 'WelcomeController@index')->name('welcome');
+Route::get('/j', 'WelcomeController@anyData')->name('welcome.get');
 
 Auth::routes();
 
