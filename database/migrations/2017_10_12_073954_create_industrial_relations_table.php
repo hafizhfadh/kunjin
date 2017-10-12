@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateDepartementsTable extends Migration
+class CreateIndustrialRelationsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,11 @@ class CreateDepartementsTable extends Migration
      */
     public function up()
     {
-        Schema::create('departements', function (Blueprint $table) {
+        Schema::create('industrial_relations', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('departement_name');
-            $table->string('job_focus');
-            $table->integer('member');
-            $table->timestamps();
+            $table->integer('nip');
+            $table->string('name');
+            $table->string('position');
         });
     }
 
@@ -29,6 +28,6 @@ class CreateDepartementsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('departements');
+        Schema::dropIfExists('industrial_relations');
     }
 }

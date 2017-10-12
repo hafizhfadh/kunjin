@@ -55,6 +55,7 @@
     <i class="fa fa-angle-up"></i>
   </a>
 
+<<<<<<< HEAD
   @guest
   @else
     <!-- Logout Modal-->
@@ -84,6 +85,34 @@
       </div>
     </div>
   @endguest
+=======
+  <!-- Logout Modal-->
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Ready to Leave {{ Auth::user()->name }}?</h5>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+        <div class="modal-footer">
+          <button class="btn btn-outline-secondary" type="button" data-dismiss="modal">Cancel</button>
+          <a href="{{ route('logout') }}" class="btn btn-outline-primary"
+              onclick="event.preventDefault();
+                       document.getElementById('logout-form').submit();">
+              Logout
+          </a>
+
+          <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+              {{ csrf_field() }}
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+>>>>>>> e8a8e39f290ba5e127282cc8606d470c6296cc4f
 
   <!-- Bootstrap core JavaScript-->
   <script src="vendor/jquery/jquery.min.js"></script>

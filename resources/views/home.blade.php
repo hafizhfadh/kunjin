@@ -111,6 +111,7 @@
             </tr>
           </tfoot>
           <tbody>
+<<<<<<< HEAD
             @foreach ($employee as $employe)
               <tr>
                 <td>
@@ -128,6 +129,8 @@
                 @endphp</td>
               </tr>
             @endforeach
+=======
+>>>>>>> e8a8e39f290ba5e127282cc8606d470c6296cc4f
           </tbody>
         </table>
       </div>
@@ -136,6 +139,7 @@
   </div>
   <!-- End Example Datatable Card-->
 
+<<<<<<< HEAD
   <!-- Area Chart Example-->
   <div class="card mb-3">
     <div class="card-header">
@@ -236,5 +240,7 @@
   </div>
   <!-- End Area Chart Example-->
 
+=======
+>>>>>>> e8a8e39f290ba5e127282cc8606d470c6296cc4f
 </div>
 @endsection
