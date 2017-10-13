@@ -1,6 +1,25 @@
 @extends('layouts.app')
 
 @section('content')
+  @push('scripts')
+    <script>
+    $(document).ready(function(){
+      $('#users').DataTable({
+          processing: true,
+          serverSide: true,
+          ajax: '/j',
+          columns: [
+              { data: 'id'},
+              { data: 'letter_number'},
+              { data: 'students.name'},
+              { data: 'company.company'},
+              { data: 'departure_date'}
+          ]
+      });
+    });
+    </script>
+  @endpush
+
   <div class="container-fluid">
 
     <!-- Breadcrumbs-->

@@ -16,7 +16,7 @@
   <!-- Custom fonts for this template-->
   <link href="{{ asset('vendor/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
   <!-- Page level plugin CSS-->
-  <link href="{{ asset('vendor/datatables/dataTables.bootstrap4.css') }}" rel="stylesheet">
+  <link href="{{ asset('vendor/datatables/jquery.dataTables.min.css') }}" rel="stylesheet">
   <!-- Custom styles for this template-->
   <link href="{{ asset('css/sb-admin.css') }}" rel="stylesheet">
 </head>
@@ -84,7 +84,7 @@
       </div>
     </div>
   @endguest
-
+  
   <!-- Bootstrap core JavaScript-->
   <script src="vendor/jquery/jquery.min.js"></script>
   <script src="vendor/popper/popper.min.js"></script>
@@ -96,21 +96,6 @@
   <script src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
   <!-- Custom scripts for all pages-->
   <script src="js/sb-admin.js"></script>
-  <script>
-  $(document).ready(function(){
-    $('#users').DataTable({
-        processing: true,
-        serverSide: true,
-        ajax: '/j',
-        columns: [
-            { data: 'id'},
-            { data: 'letter_number'},
-            { data: 'students.name'},
-            { data: 'company.company'},
-            { data: 'departure_date'}
-        ]
-    });
-  });
-  </script>
+  @stack('scripts')
 </body>
 </html>
