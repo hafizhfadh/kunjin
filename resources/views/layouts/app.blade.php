@@ -16,7 +16,7 @@
   <!-- Custom fonts for this template-->
   <link href="{{ asset('vendor/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
   <!-- Page level plugin CSS-->
-  <link href="{{ asset('vendor/datatables/dataTables.bootstrap4.css') }}" rel="stylesheet">
+  <link href="{{ asset('vendor/datatables/jquery.dataTables.min.css') }}" rel="stylesheet">
   <!-- Custom styles for this template-->
   <link href="{{ asset('css/sb-admin.css') }}" rel="stylesheet">
 </head>
@@ -176,26 +176,10 @@
   <!-- Core plugin JavaScript-->
   <script src="{{ asset('vendor/jquery-easing/jquery.easing.min.js') }}"></script>
   <!-- Page level plugin JavaScript-->
-  <script src="{{ asset('vendor/chart.js/Chart.min.js') }}"></script>
-  <script src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
+  <script src="vendor/chart.js/Chart.min.js"></script>
+  <script src="vendor/datatables/jquery.dataTables.js"></script>
   <!-- Custom scripts for all pages-->
-  <script src="{{ asset('js/sb-admin.js') }}"></script>
-  <script>
-  $(document).ready(function(){
-    $('#users').DataTable({
-        processing: true,
-        serverSide: true,
-        ajax: '{{ url('resource/departure-data') }}',
-        columns: [
-            { data: 'id'},
-            { data: 'letter_number'},
-            { data: 'students.name'},
-            { data: 'company.company'},
-            { data: 'departure_date'},
-            { data: 'action', searchable:false, orderable:false}
-        ]
-    });
-  });
-  </script>
+  <script src="js/sb-admin.js"></script>
+  @stack('scripts')
 </body>
 </html>
