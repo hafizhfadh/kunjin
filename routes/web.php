@@ -11,8 +11,13 @@
 |
 */
 Route::get('/', 'WelcomeController@index')->name('welcome');
-Route::get('/j', 'WelcomeController@anyData')->name('welcome.get');
 
 Auth::routes();
 
 Route::resource('dashboard', 'DashboardController');
+Route::resource('departure', 'DepartureController');
+
+Route::get('resource/company-data', 'CompanyController@data');
+Route::get('resource/departure-data', 'DepartureController@data');
+Route::get('resource/letter-data', 'LetterController@data');
+Route::get('resource/student-data', 'StudentController@data');
