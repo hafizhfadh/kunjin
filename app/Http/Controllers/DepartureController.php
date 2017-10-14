@@ -22,7 +22,7 @@ class DepartureController extends Controller
         return view('departure.index');
     }
 
-    public function anyData(Datatables $datatables)
+    public function data(Datatables $datatables)
     {
       $test = Departure::with('students', 'company')->select(['*']);
       return Datatables::of($test)

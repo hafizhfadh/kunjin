@@ -2,6 +2,25 @@
 
 @section('content')
   <!-- Example DataTables Card-->
+  @push('scripts')
+    <script>
+    $(document).ready(function(){
+      $('#users').DataTable({
+          processing: true,
+          serverSide: false,
+          ajax: '{{ url('resource/departure-data') }}',
+          columns: [
+              { data: 'id'},
+              { data: 'letter_number'},
+              { data: 'students.name'},
+              { data: 'company.company'},
+              { data: 'departure_date'},
+              { data: 'action',orderable:false, searchable:false}
+          ]
+      });
+    });
+    </script>
+  @endpush
   <div class="card mb-3">
     <div class="card-header">
       <i class="fa fa-table"></i> Data Table Example</div>
