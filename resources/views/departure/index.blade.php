@@ -14,8 +14,12 @@
               { data: 'letter_number'},
               { data: 'students.name'},
               { data: 'company.company'},
+            @guest
+              { data: 'departure_date'}
+            @else
               { data: 'departure_date'},
               { data: 'action',orderable:false, searchable:false}
+            @endguest
           ]
       });
     });
@@ -23,25 +27,23 @@
   @endpush
   <div class="card mb-3">
     <div class="card-header">
-      <i class="fa fa-table"></i> Data Table Example</div>
+      <i class="fa fa-table"></i> Keberangkatan
+      <a href="{{url('departure/create')}}" class="btn btn-primary">Add</a>
+    </div>
     <div class="card-body">
       <div class="table-responsive">
         <table class="table table-bordered" id="users">
             <thead>
                 <tr>
+                    <th>Id</th>
+                    <th>Nomor surat</th>
+                    <th>Nama siswa</th>
+                    <th>Nama perusahaan</th>
+                    <th>Tanggal berangkat</th>
                   @guest
-                    <th>Id</th>
-                    <th>Letter Number</th>
-                    <th>Student Name</th>
-                    <th>Company Name</th>
-                    <th>Departure Date</th>
+
                   @else
-                    <th>Id</th>
-                    <th>Letter Number</th>
-                    <th>Student Name</th>
-                    <th>Company Name</th>
-                    <th>Departure Date</th>
-                    <th>Action</th>
+                    <th>Aksi</th>
                   @endguest
                 </tr>
             </thead>
@@ -51,4 +53,5 @@
     <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
   </div>
   <!-- End Example Datatable Card-->
+
 @endsection

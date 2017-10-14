@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use App\Departure;
 use Yajra\DataTables\DataTables;
 
+use App\Student;
+use App\Company;
+
 class DepartureController extends Controller
 {
     /**
@@ -24,8 +27,13 @@ class DepartureController extends Controller
       return Datatables::of($test)
                          //if admin
                          ->addColumn('action', function($departures){
-                           return '<a class="btn btn-warning" href="'.url('departure/'.$departures->id.'/edit').'">Edit</a>
-                                  <button class="btn btn-danger" value="{{$departures->id}}">Delete</button>';
+                           return '<a href="" class="btn btn-warning">Edit</a>
+                                   <form method="post" action="'.url("departure/".$departures->id).'">
+                                      '.csrf_field().'
+                                     <input name="_method" type="hidden" value="DELETE">
+                                     <button type="submit" class="btn btn-danger">Delete</button>
+                                   </form>
+                                   ';
                          })
                          ->rawColumns(['action'])
                          //endif
@@ -39,7 +47,10 @@ class DepartureController extends Controller
      */
     public function create()
     {
-        //
+        $departure = Departure::select('id')->orderBy('id','desc')->first();
+        $students = Student::select('id','name')->get();
+        $companies  = Company::select('id','company')->get();
+        return view('departure.create',compact('departure', 'students', 'companies'));
     }
 
     /**
@@ -50,7 +61,15 @@ class DepartureController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validate = $this->validate($request, [
+          'letter_number' => 'required',
+          'student_id' => 'required|exist:students',
+          'company_id' => 'required|exist:company',
+          'departure_date' => 'required|date'
+        ]);
+
+        Departure::create($validate);
+        return 'sucsess';
     }
 
     /**
@@ -61,7 +80,8 @@ class DepartureController extends Controller
      */
     public function show($id)
     {
-        //
+        $departure = Departure::find($id);
+        return view('departure.show', compact('departure'));
     }
 
     /**
@@ -72,7 +92,8 @@ class DepartureController extends Controller
      */
     public function edit($id)
     {
-        return $id;
+        $departure = Departure::find($id);
+        return view('departure.edit', compact('departure'));
     }
 
     /**
@@ -84,7 +105,14 @@ class DepartureController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validate = $this->validate($request, [
+          'letter_number' => 'required',
+          'student_id' => 'required|exist:students',
+          'company_id' => 'required|exist:company',
+          'departure_date' => 'required|date'
+        ]);
+        Departure::where('id', $id)->update($validate);
+        return 'sucsess';
     }
 
     /**
@@ -95,6 +123,7 @@ class DepartureController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Departure::find($id)->delete();
+        return 'sucsess';
     }
 }

@@ -28,7 +28,7 @@ class CompanyController extends Controller
 
     public function index()
     {
-        //
+        return view('company.index');
     }
 
     /**
@@ -38,7 +38,7 @@ class CompanyController extends Controller
      */
     public function create()
     {
-        //
+        return view('company.create');
     }
 
     /**
@@ -66,7 +66,8 @@ class CompanyController extends Controller
      */
     public function show($id)
     {
-        //
+        $company = Company::find($id);
+        return view('company.show', compact('company'));
     }
 
     /**
@@ -77,7 +78,8 @@ class CompanyController extends Controller
      */
     public function edit($id)
     {
-        //
+        $company = Company::find($id);
+        return view('company.edit', compact('company'));
     }
 
     /**
@@ -89,7 +91,13 @@ class CompanyController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+      $validate = $this->validate($request,[
+        'company' => 'required',
+        'contact' => 'required',
+        'address' => 'required',
+        'company_pic' => 'required'
+      ]);
+      Company::find($id)->update($validate);
     }
 
     /**
@@ -100,6 +108,6 @@ class CompanyController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Company::find($id)->delete();
     }
 }
