@@ -16,7 +16,7 @@ class CreateDeparturesTable extends Migration
         Schema::create('departures', function (Blueprint $table) {
             $table->increments('id');
             $table->string('letter_number');
-            $table->integer('student_id');
+            $table->string('student_id');
             $table->integer('company_id');
             $table->date('departure_date');
         });

@@ -21,8 +21,8 @@
       </div>
 
       <div class="form-group row">
-        <div class="col-md-5">
-          <label for="exampleInputName">Murid untuk kunjungan industri</label>
+        <div class="col-md-6">
+          <label for="exampleInputName">Peserta (ctrl+klik untuk pilih lebih dari 1)</label>
           <select class="form-control" multiple="multiple" name="student_id[]">
             @foreach ($students as $s)
               <option value="{{$s->id}}">{{$s->name}}</option>
@@ -45,7 +45,7 @@
       <div class="form-group row">
         <div class="col-md-5">
           <label for="exampleInputName">Tanggal berangkat</label>
-          <input type="text" class="form-control" name="departure_date" id="pickyDate" placeholder="Hari/Bulan/Tahun">
+          <input type="text" class="form-control" name="departure_date" id="pickyDate" placeholder="Tahun/Bulan/Tanggal">
         </div>
       </div>
 

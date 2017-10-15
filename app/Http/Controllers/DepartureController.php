@@ -21,7 +21,8 @@ class DepartureController extends Controller
      */
     public function index()
     {
-        return view('departure.index');
+        $departure = Departure::select('updated_at')->orderBy('updated_at','desc')->first();
+        return view('departure.index', compact('departure'));
     }
 
     public function data(Datatables $datatables)
@@ -36,9 +37,13 @@ class DepartureController extends Controller
                              }
                              return $stud;
                          })
+                         ->editColumn('departure_date', function($departures){
+                           $date = date('d-m-Y', strtotime($departures->departure_date));
+                           return $date;
+                         })
                          //if admin
                          ->addColumn('action', function($departures){
-                           return '<a href="" class="btn btn-warning">Edit</a>
+                           return '<a href="'.url('departure/'.$departures->id.'/edit').'" class="btn btn-warning">Edit</a>
                                    <form method="post" action="'.url("departure/".$departures->id).'">
                                       '.csrf_field().'
                                      <input name="_method" type="hidden" value="DELETE">
@@ -110,7 +115,10 @@ class DepartureController extends Controller
     public function edit($id)
     {
         $departure = Departure::find($id);
-        return view('departure.edit', compact('departure'));
+
+        $students = Student::select('id','name')->get();
+        $companies  = Company::select('id','company')->get();
+        return view('departure.edit', compact('departure', 'students', 'companies'));
     }
 
     /**
