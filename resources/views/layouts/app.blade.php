@@ -17,6 +17,7 @@
   <link href="{{ asset('vendor/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
   <!-- Page level plugin CSS-->
   <link href="{{ asset('vendor/datatables/jquery.dataTables.min.css') }}" rel="stylesheet">
+  <link href="{{ asset('vendor/datepicker/datepicker3.css') }}" rel="stylesheet">
   <!-- Custom styles for this template-->
   <link href="{{ asset('css/sb-admin.css') }}" rel="stylesheet">
 </head>
@@ -44,7 +45,19 @@
     </div>
   </nav>
   <div class="content-wrapper">
+    @guest
+
+    @else
+      @include('layouts.message')
+    @endguest
+
     @yield('content')
+    <br>
+    <div class="row">
+      <div class="col-md-5">
+        @include('layouts.error')
+      </div>
+    </div>
   </div>
 
   <footer class="sticky-footer">
@@ -98,6 +111,7 @@
   <!-- Page level plugin JavaScript-->
   <script src="{{ asset('vendor/chart.js/Chart.min.js') }}"></script>
   <script src="{{ asset('vendor/datatables/jquery.dataTables.js') }}"></script>
+  <script src="{{ asset('vendor/datepicker/bootstrap-datepicker.js') }}"></script>
   <!-- Custom scripts for all pages-->
   <script src="{{ asset('js/sb-admin.js') }}"></script>
   @stack('scripts')

@@ -1,17 +1,54 @@
 @extends('layouts.app')
 
 @section('content')
-    <form>
-      <div class="form-group">
-
-        <div class="form-row">
-          <div class="col-md-5">
-            <label for="exampleInputName">Nomor surat</label>
-              <p>{{$departure->id}}</p>
-          </div>
+  @include('layouts.message')
+  @push('scripts')
+    <script type="text/javascript">
+      $(document).ready(function () {
+        $('#pickyDate').datepicker({
+            format: "yyyy-mm-dd"
+          });
+      });
+    </script>
+  @endpush
+    <form method="post" action="{{url('departure')}}">
+      {{ csrf_field() }}
+      <div class="form-group row">
+        <div class="col-md-5">
+          <label for="exampleInputName">Nomor surat</label>
+          <input type="text" class="form-control" name="letter_number" value="{{$surat}}">
         </div>
-
       </div>
-      <a class="btn btn-primary" href="login.html">Register</a>
+
+      <div class="form-group row">
+        <div class="col-md-5">
+          <label for="exampleInputName">Murid untuk kunjungan industri</label>
+          <select class="form-control" multiple="multiple" name="student_id[]">
+            @foreach ($students as $s)
+              <option value="{{$s->id}}">{{$s->name}}</option>
+            @endforeach
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <div class="col-md-5">
+          <label for="exampleInputName">Perusahaan</label>
+          <select class="form-control" name="company_id">
+            @foreach ($companies as $c)
+              <option value="{{$c->id}}">{{$c->company}}</option>
+            @endforeach
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <div class="col-md-5">
+          <label for="exampleInputName">Tanggal berangkat</label>
+          <input type="text" class="form-control" name="departure_date" id="pickyDate" placeholder="Hari/Bulan/Tahun">
+        </div>
+      </div>
+
+      <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 @endsection

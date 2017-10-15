@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use App\Http\Controllers\Controller;
+
 use App\Departure;
 use Yajra\DataTables\DataTables;
 
@@ -25,6 +28,14 @@ class DepartureController extends Controller
     {
       $test = Departure::with('students', 'company')->select(['*']);
       return Datatables::of($test)
+                         ->editColumn('students.name', function($departures){
+                             $id = json_decode($departures->student_id);
+                             $students = Student::find($id);
+                             foreach ($students as $s) {
+                               $stud[] = $s->name;
+                             }
+                             return $stud;
+                         })
                          //if admin
                          ->addColumn('action', function($departures){
                            return '<a href="" class="btn btn-warning">Edit</a>
@@ -47,10 +58,11 @@ class DepartureController extends Controller
      */
     public function create()
     {
-        $departure = Departure::select('id')->orderBy('id','desc')->first();
+        $departure = Departure::select('id')->orderBy('id','desc')->increment('id')+1;
+        $surat = '2017/Hubin/Kunjin/Smk.tb/'.$departure;
         $students = Student::select('id','name')->get();
         $companies  = Company::select('id','company')->get();
-        return view('departure.create',compact('departure', 'students', 'companies'));
+        return view('departure.create',compact('departure', 'students', 'companies', 'surat'));
     }
 
     /**
@@ -61,15 +73,20 @@ class DepartureController extends Controller
      */
     public function store(Request $request)
     {
-        $validate = $this->validate($request, [
-          'letter_number' => 'required',
-          'student_id' => 'required|exist:students',
-          'company_id' => 'required|exist:company',
-          'departure_date' => 'required|date'
-        ]);
+      $input = request()->validate([
+              'letter_number' => 'required',
+              'student_id' => 'required',
+              'company_id' => 'required|exists:companies,id',
+              'departure_date' => 'required|date'
+          ]);
+      $departure = Departure::select('id')->orderBy('id','desc')->increment('id')+1;
+      $surat = '2017/Hubin/Kunjin/Smk.tb/'.$departure;
+      $request['student_id'] = json_encode($request['student_id']);
+      $request['letter_number'] = $surat;
+      $input = request()->all();
+      $departure = Departure::create($input);
 
-        Departure::create($validate);
-        return 'sucsess';
+      return back()->with('success', 'Keberangkatan berhasil dibuat.');
     }
 
     /**
