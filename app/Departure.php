@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Company;
 use App\Student;
 use Illuminate\Database\Eloquent\Model;
 
@@ -13,5 +14,9 @@ class Departure extends Model
   public function company()
   {
     return $this->belongsTo(Company::class, 'company_id');
+  }
+  public function students()
+  {
+    return $this->belongsTo(Student::class, 'company_id');
   }
 }
