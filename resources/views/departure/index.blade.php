@@ -13,12 +13,14 @@
               { data: 'letter.letter_number'},
               { data: 'students.name'},
               { data: 'company.company'},
-            @guest
+              @if (Auth::guest())
               { data: 'departure_date'}
-            @else
+              @elseif (Auth::guard('admin'))
               { data: 'departure_date'},
               { data: 'action',orderable:false, searchable:false}
-            @endguest
+              @else
+              // User
+              @endif
           ]
       });
     });

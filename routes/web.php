@@ -18,7 +18,9 @@ Route::resource('dashboard', 'DashboardController');
 Route::resource('departure', 'DepartureController');
 Route::resource('student', 'StudentController');
 Route::resource('company', 'CompanyController');
+Route::resource('letter', 'LetterController');
 
 Route::get('resource/company-data', 'CompanyController@data');
 Route::get('resource/departure-data', 'DepartureController@data');
 Route::get('resource/student-data', 'StudentController@data');
+Route::get('resource/letter-data', 'LetterController@data');
