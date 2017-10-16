@@ -27,7 +27,7 @@ class DepartureController extends Controller
 
     public function data(Datatables $datatables)
     {
-      $test = Departure::with('students', 'company')->select(['*']);
+      $test = Departure::with('company')->select(['*']);
       return Datatables::of($test)
                          ->editColumn('students.name', function($departures){
                              $id = json_decode($departures->student_id);

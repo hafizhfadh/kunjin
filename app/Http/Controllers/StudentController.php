@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Student;
 use Illuminate\Http\Request;
+use Yajra\DataTables\DataTables;
 
 class StudentController extends Controller
 {
@@ -13,7 +15,14 @@ class StudentController extends Controller
      */
     public function index()
     {
-        //
+        return view('student.index');
+    }
+
+    public function data(Datatables $datatables)
+    {
+      $test = Student::select(['*']);
+      return Datatables::of($test)
+                         ->make(true);
     }
 
     /**
