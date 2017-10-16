@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddTimestampToDeparture extends Migration
+class CreateLettersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,10 @@ class AddTimestampToDeparture extends Migration
      */
     public function up()
     {
-        Schema::table('departures', function (Blueprint $table) {
+        Schema::create('letters', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('letter_number');
+            $table->string('status');
             $table->timestamps();
         });
     }
@@ -25,8 +28,6 @@ class AddTimestampToDeparture extends Migration
      */
     public function down()
     {
-        Schema::table('departures', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('letters');
     }
 }

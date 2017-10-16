@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Student;
+<<<<<<< HEAD
+=======
+use App\Letter;
+>>>>>>> 2cc98d3b492db1266c6686eaa7dbad43905fb3e8
 use Illuminate\Http\Request;
-use Yajra\DataTables\DataTables;
 
-class StudentController extends Controller
+class LetterController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,14 +17,18 @@ class StudentController extends Controller
      */
     public function index()
     {
-        return view('student.index');
+<<<<<<< HEAD
+        //
+=======
+        return view('letter.index');
     }
 
     public function data(Datatables $datatables)
     {
-      $test = Student::select(['*']);
+      $test = Letter::select(['*']);
       return Datatables::of($test)
                          ->make(true);
+>>>>>>> 2cc98d3b492db1266c6686eaa7dbad43905fb3e8
     }
 
     /**

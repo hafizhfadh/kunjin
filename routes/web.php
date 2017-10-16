@@ -22,3 +22,4 @@ Route::resource('company', 'CompanyController');
 Route::get('resource/company-data', 'CompanyController@data');
 Route::get('resource/departure-data', 'DepartureController@data');
 Route::get('resource/student-data', 'StudentController@data');
+Route::get('resource/letter-data', 'LetterController@data');

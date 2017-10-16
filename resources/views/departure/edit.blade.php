@@ -11,8 +11,9 @@
       });
     </script>
   @endpush
-    <form method="post" action="{{url('departure')}}">
+    <form method="post" action="{{url('departure/'.$departure->id)}}">
       {{ csrf_field() }}
+      <input type="hidden" name="_method" value="PATCH">
       <div class="form-group row">
         <div class="col-md-5">
           <label for="exampleInputName">Nomor surat</label>
@@ -23,10 +24,10 @@
       <div class="form-group row">
         <div class="col-md-6">
           <label for="exampleInputName">Peserta (ctrl+klik untuk pilih lebih dari 1)</label>
-          <p></p>
+          <p>{{implode(',',$stud)}}</p>
 
           <select class="form-control" multiple="multiple" name="student_id[]">
-            @foreach ($students as $s)
+            @foreach ($studentss as $s)
               <option value="{{$s->id}}">{{$s->name}}</option>
             @endforeach
           </select>

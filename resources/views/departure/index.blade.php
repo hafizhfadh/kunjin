@@ -10,15 +10,17 @@
           serverSide: false,
           ajax: '{{ url('resource/departure-data') }}',
           columns: [
-              { data: 'letter_number'},
+              { data: 'letter.letter_number'},
               { data: 'students.name'},
               { data: 'company.company'},
-            @guest
+              @if (Auth::guest())
               { data: 'departure_date'}
-            @else
+              @elseif (Auth::guard('admin'))
               { data: 'departure_date'},
               { data: 'action',orderable:false, searchable:false}
-            @endguest
+              @else
+              // User
+              @endif
           ]
       });
     });
@@ -37,10 +39,11 @@
         <table class="table table-bordered" id="users">
             <thead>
                 <tr>
-                    <th>Nomor surat</th>
+                    <th>No surat</th>
                     <th>Nama siswa</th>
                     <th>Nama perusahaan</th>
                     <th>Tanggal berangkat</th>
+                    <th>Status</th>
                   @guest
 
                   @else
@@ -51,7 +54,11 @@
         </table>
       </div>
     </div>
-    <div class="card-footer small text-muted">Terakhir diupdate {{$departure->updated_at}}</div>
+    <div class="card-footer small text-muted">
+      @if (!empty($departure->updated_at))
+        Terakhir diupdate {{$departure->updated_at}}
+    </div>
+      @endif
   </div>
   <!-- End Example Datatable Card-->
 
