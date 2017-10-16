@@ -19,6 +19,7 @@ class CreateDeparturesTable extends Migration
             $table->string('student_id');
             $table->integer('company_id');
             $table->date('departure_date');
+            $table->timestamps();
         });
     }
 

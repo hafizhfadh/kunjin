@@ -10,7 +10,7 @@
           serverSide: false,
           ajax: '{{ url('resource/departure-data') }}',
           columns: [
-              { data: 'letter_number'},
+              { data: 'letter.letter_number'},
               { data: 'students.name'},
               { data: 'company.company'},
             @guest
@@ -30,7 +30,6 @@
       @guest
       @else
         <a href="{{url('departure/create')}}" class="btn btn-primary">Add</a>
-        <p id="test">he</p>
       @endguest
     </div>
     <div class="card-body">
@@ -38,10 +37,11 @@
         <table class="table table-bordered" id="users">
             <thead>
                 <tr>
-                    <th>Nomor surat</th>
+                    <th>No surat</th>
                     <th>Nama siswa</th>
                     <th>Nama perusahaan</th>
                     <th>Tanggal berangkat</th>
+                    <th>Status</th>
                   @guest
 
                   @else

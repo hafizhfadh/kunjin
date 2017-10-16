@@ -80,7 +80,7 @@ class DepartureController extends Controller
     {
       $input = request()->validate([
               'letter_number' => 'required',
-              'student_id' => 'required',
+              'student_id' => 'required|max:5',
               'company_id' => 'required|exists:companies,id',
               'departure_date' => 'required|date'
           ]);
