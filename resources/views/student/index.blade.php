@@ -33,8 +33,8 @@
             <thead>
                 <tr>
                     <th>NIPD</th>
-                    <th>Nama siswa</th>
-                    <th>Kelas</th>
+                    <th>Student Name</th>
+                    <th>Class</th>
                     <th>Email</th>
                 </tr>
             </thead>

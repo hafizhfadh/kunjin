@@ -32,15 +32,10 @@
         <table class="table table-bordered" id="users">
             <thead>
                 <tr>
-                    <th>Nomor surat</th>
-                    <th>Nama siswa</th>
-                    <th>Nama perusahaan</th>
-                    <th>Tanggal berangkat</th>
-                  @guest
-
-                  @else
-                    <th>Aksi</th>
-                  @endguest
+                    <th>Companies Name</th>
+                    <th>Address</th>
+                    <th>Contact</th>
+                    <th>Picture</th>
                 </tr>
             </thead>
         </table>
