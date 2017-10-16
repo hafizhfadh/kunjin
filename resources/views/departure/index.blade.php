@@ -30,6 +30,7 @@
       @guest
       @else
         <a href="{{url('departure/create')}}" class="btn btn-primary">Add</a>
+        <p id="test">he</p>
       @endguest
     </div>
     <div class="card-body">
@@ -51,7 +52,11 @@
         </table>
       </div>
     </div>
-    <div class="card-footer small text-muted">Terakhir diupdate {{$departure->updated_at}}</div>
+    <div class="card-footer small text-muted">
+      @if (!empty($departure->updated_at))
+        Terakhir diupdate {{$departure->updated_at}}
+    </div>
+      @endif
   </div>
   <!-- End Example Datatable Card-->
 

@@ -27,7 +27,7 @@ class DepartureController extends Controller
 
     public function data(Datatables $datatables)
     {
-      $test = Departure::with('students', 'company')->select(['*']);
+      $test = Departure::with('company')->select(['*']);
       return Datatables::of($test)
                          ->editColumn('students.name', function($departures){
                              $id = json_decode($departures->student_id);
@@ -43,7 +43,8 @@ class DepartureController extends Controller
                          })
                          //if admin
                          ->addColumn('action', function($departures){
-                           return '<a href="'.url('departure/'.$departures->id.'/edit').'" class="btn btn-warning">Edit</a>
+                           return '<a href="'.url('departure/'.$departures->id).'" class="btn btn-primary">Show</a>
+                                   <a href="'.url('departure/'.$departures->id.'/edit').'" class="btn btn-warning">Edit</a>
                                    <form method="post" action="'.url("departure/".$departures->id).'">
                                       '.csrf_field().'
                                      <input name="_method" type="hidden" value="DELETE">
@@ -55,7 +56,6 @@ class DepartureController extends Controller
                          //endif
                          ->make(true);
     }
-
     /**
      * Show the form for creating a new resource.
      *
@@ -103,7 +103,11 @@ class DepartureController extends Controller
     public function show($id)
     {
         $departure = Departure::find($id);
-        return view('departure.show', compact('departure'));
+
+        $student_id = json_decode($departure->student_id);
+        $students = Student::find($student_id);
+        $company  = Company::find($departure->company_id);
+        return view('departure.show', compact('departure', 'students', 'company'));
     }
 
     /**
@@ -116,9 +120,15 @@ class DepartureController extends Controller
     {
         $departure = Departure::find($id);
 
-        $students = Student::select('id','name')->get();
+        $id = json_decode($departure->student_id);
+        $students = Student::find($id);
+        foreach ($students as $s) {
+          $stud[] = $s->name;
+        }
+
+        $studentss = Student::select('id','name')->get();
         $companies  = Company::select('id','company')->get();
-        return view('departure.edit', compact('departure', 'students', 'companies'));
+        return view('departure.edit', compact('departure', 'studentss', 'companies', 'stud'));
     }
 
     /**
@@ -130,14 +140,16 @@ class DepartureController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $validate = $this->validate($request, [
-          'letter_number' => 'required',
-          'student_id' => 'required|exist:students',
-          'company_id' => 'required|exist:company',
-          'departure_date' => 'required|date'
-        ]);
-        Departure::where('id', $id)->update($validate);
-        return 'sucsess';
+      $input = request()->validate([
+              'student_id' => 'required',
+              'company_id' => 'required|exists:companies,id',
+              'departure_date' => 'required|date'
+          ]);
+      $request['student_id'] = json_encode($request['student_id']);
+      $input = request()->except(['_token', '_method']);
+      $departure = Departure::where('id', $id)->update($input);;
+
+      return back()->with('success', 'Keberangkatan berhasil diubah.');
     }
 
     /**
@@ -149,6 +161,6 @@ class DepartureController extends Controller
     public function destroy($id)
     {
         Departure::find($id)->delete();
-        return 'sucsess';
+        return back()->with('success', 'Keberangkatan berhasil dihapus.');
     }
 }
