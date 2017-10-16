@@ -45,17 +45,19 @@
     </div>
   </nav>
   <div class="content-wrapper">
-    @guest
+    <div class="container-fluid">
+      @guest
 
-    @else
-      @include('layouts.message')
-    @endguest
+      @else
+        @include('layouts.message')
+      @endguest
 
-    @yield('content')
-    <br>
-    <div class="row">
-      <div class="col-md-5">
-        @include('layouts.error')
+      @yield('content')
+      <br>
+      <div class="row">
+        <div class="col-md-5">
+          @include('layouts.error')
+        </div>
       </div>
     </div>
   </div>
