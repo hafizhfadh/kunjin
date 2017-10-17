@@ -5,12 +5,12 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\Controller;
-
-use App\Departure;
 use Yajra\DataTables\DataTables;
 
+use App\Departure;
 use App\Student;
 use App\Company;
+use App\Letter;
 
 class DepartureController extends Controller
 {
@@ -65,7 +65,7 @@ class DepartureController extends Controller
     {
         $departure = Departure::select('id')->orderBy('id','desc')->increment('id')+1;
         $surat = '2017/Hubin/Kunjin/Smk.tb/'.$departure;
-        $students = Student::select('id','name')->get();
+        $students = Student::select('id','name','class')->get();
         $companies  = Company::select('id','company')->get();
         return view('departure.create',compact('departure', 'students', 'companies', 'surat'));
     }
@@ -81,23 +81,27 @@ class DepartureController extends Controller
       $input = request()->validate([
               'letter_id' => 'required',
               'letter_number' => 'required',
+              'status' => 'required',
               'student_id' => 'required|max:5',
               'company_id' => 'required|exists:companies,id',
               'departure_date' => 'required|date'
           ]);
-      $departure = Departure::select('id')->orderBy('id','desc')->increment('id')+1;
-      $surat = '2017/Hubin/Kunjin/Smk.tb/'.$departure;
-      $request['student_id'] = json_encode($request['student_id']);
-      $request['letter_number'] = $surat;
+      // $departure = Departure::select('id')->orderBy('id','desc')->increment('id')+1;
+      // $surat = '2017/Hubin/Kunjin/Smk.tb/'.$departure;
+      //
+      // $request['letter_number'] = $surat;
+      // $request['status'] = "Permohonan surat";
+      // $letter = request()->only('letter_number', 'status');
+      // $letterins = Letter::create($letter);
+      //
+      // $letter_id = $letterins->id;
 
-      $letter = request()->only('letter_number');
-      $letterins = Letter::create($letter);
-
-      $letter_id = $letterins->id;
-
-      $request['letter_id'] = $letter_id;
-      $departure = request()->except('letter_number');
-      $departureins = Departure::create($input);
+      $departuren = new Departure;
+      $departuren->letter_id = 1;
+      $departuren->student_id= json_encode($request->student_id);
+      $departuren->company_id= $request->company_id;
+      $departuren->departure_date = $request->departure_date;
+      $departuren->save();
 
       return back()->with('success', 'Keberangkatan berhasil dibuat.');
     }
@@ -136,7 +140,7 @@ class DepartureController extends Controller
           $stud[] = $s->name;
         }
 
-        $studentss = Student::select('id','name')->get();
+        $studentss = Student::select('id','name', 'class')->get();
         $companies  = Company::select('id','company')->get();
         return view('departure.edit', compact('departure', 'studentss', 'companies', 'stud'));
     }
@@ -171,6 +175,7 @@ class DepartureController extends Controller
     public function destroy($id)
     {
         Departure::find($id)->delete();
+        Letter::find($id)->delete();
         return back()->with('success', 'Keberangkatan berhasil dihapus.');
     }
 }
