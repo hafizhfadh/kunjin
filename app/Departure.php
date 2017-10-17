@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 class Departure extends Model
 {
   public $incrementing = false;
-  
+
   public function company()
   {
     return $this->belongsTo(Company::class, 'company_id');

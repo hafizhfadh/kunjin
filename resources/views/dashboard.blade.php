@@ -51,7 +51,7 @@
             <div class="card-body-icon">
               <i class="fa fa-fw fa-users"></i>
             </div>
-            <div class="mr-5">26 Students Pending!</div>
+            <div class="mr-5">26 Belum Berangkat!</div>
           </div>
           <a class="card-footer text-white clearfix small z-1" href="#">
             <span class="float-left">View Details</span>
@@ -67,7 +67,7 @@
             <div class="card-body-icon">
               <i class="fa fa-fw fa-list"></i>
             </div>
-            <div class="mr-5">11 New Tasks!</div>
+            <div class="mr-5">11 Pending!</div>
           </div>
           <a class="card-footer text-white clearfix small z-1" href="#">
             <span class="float-left">View Details</span>
@@ -81,9 +81,9 @@
         <div class="card text-white bg-success o-hidden h-100">
           <div class="card-body">
             <div class="card-body-icon">
-              <i class="fa fa-fw fa-shopping-cart"></i>
+              <i class="fa fa-fw fa-car"></i>
             </div>
-            <div class="mr-5">123 New Orders!</div>
+            <div class="mr-5">123 Sudah Berangkat!</div>
           </div>
           <a class="card-footer text-white clearfix small z-1" href="#">
             <span class="float-left">View Details</span>
@@ -97,9 +97,9 @@
         <div class="card text-white bg-primary o-hidden h-100">
           <div class="card-body">
             <div class="card-body-icon">
-              <i class="fa fa-fw fa-support"></i>
+              <i class="fa fa-fw fa-building"></i>
             </div>
-            <div class="mr-5">13 New Tickets!</div>
+            <div class="mr-5">13 Perusahaan Tersedia!</div>
           </div>
           <a class="card-footer text-white clearfix small z-1" href="#">
             <span class="float-left">View Details</span>
