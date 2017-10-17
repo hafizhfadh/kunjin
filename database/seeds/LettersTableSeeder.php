@@ -15,12 +15,12 @@ class LettersTableSeeder extends Seeder
         DB::table('letters')->delete();
 
         $letters = [
-          ['id'=>1,'letter_number'=>'SMK/001','status'=>'Permohonan surat'],
-          ['id'=>2,'letter_number'=>'SMK/002','status'=>'Pemrosesan surat'],
-          ['id'=>3,'letter_number'=>'SMK/003','status'=>'Boleh berangkat'],
-          ['id'=>4,'letter_number'=>'SMK/004','status'=>'Gagal'],
-          ['id'=>5,'letter_number'=>'SMK/005','status'=>'Pengumpulan laporan'],
-          ['id'=>6,'letter_number'=>'SMK/006','status'=>'Selesai']
+          ['letter_number'=>'SMK/001','status'=>'Permohonan surat'],
+          ['letter_number'=>'SMK/002','status'=>'Pemrosesan surat'],
+          ['letter_number'=>'SMK/003','status'=>'Boleh berangkat'],
+          ['letter_number'=>'SMK/004','status'=>'Gagal'],
+          ['letter_number'=>'SMK/005','status'=>'Pengumpulan laporan'],
+          ['letter_number'=>'SMK/006','status'=>'Selesai']
         ];
         Letter::insert($letters);
     }

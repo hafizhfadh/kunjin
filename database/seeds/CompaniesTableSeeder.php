@@ -15,8 +15,8 @@ class CompaniesTableSeeder extends Seeder
       DB::table('companies')->delete();
 
           $companies = [
-            ['id'=>1, 'company'=>'PT Makmur Sejahtera', 'contact'=>'000000000000', 'address'=>'Jalan disini aja', 'company_pic'=>'company_default.jpg'],
-            ['id'=>2, 'company'=>'PT Semangat Pagi', 'contact'=>'000000000000', 'address'=>'Jalan disini aja', 'company_pic'=>'company_default.jpg']
+            ['company'=>'PT Makmur Sejahtera', 'contact'=>'000000000000', 'address'=>'Jalan disini aja', 'company_pic'=>'company_default.jpg'],
+            ['company'=>'PT Semangat Pagi', 'contact'=>'000000000000', 'address'=>'Jalan disini aja', 'company_pic'=>'company_default.jpg']
           ];
 
       Company::insert($companies);
