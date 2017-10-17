@@ -27,7 +27,7 @@ class DepartureController extends Controller
 
     public function data(Datatables $datatables)
     {
-      $test = Departure::with('company')->select(['*']);
+      $test = Departure::with('company', 'letter')->select(['*']);
       return Datatables::of($test)
                          ->editColumn('students.name', function($departures){
                              $id = json_decode($departures->student_id);
@@ -79,6 +79,7 @@ class DepartureController extends Controller
     public function store(Request $request)
     {
       $input = request()->validate([
+              'letter_id' => 'required',
               'letter_number' => 'required',
               'student_id' => 'required|max:5',
               'company_id' => 'required|exists:companies,id',
@@ -88,8 +89,15 @@ class DepartureController extends Controller
       $surat = '2017/Hubin/Kunjin/Smk.tb/'.$departure;
       $request['student_id'] = json_encode($request['student_id']);
       $request['letter_number'] = $surat;
-      $input = request()->all();
-      $departure = Departure::create($input);
+
+      $letter = request()->only('letter_number');
+      $letterins = Letter::create($letter);
+
+      $letter_id = $letterins->id;
+
+      $request['letter_id'] = $letter_id;
+      $departure = request()->except('letter_number');
+      $departureins = Departure::create($input);
 
       return back()->with('success', 'Keberangkatan berhasil dibuat.');
     }
@@ -106,8 +114,10 @@ class DepartureController extends Controller
 
         $student_id = json_decode($departure->student_id);
         $students = Student::find($student_id);
+
         $company  = Company::find($departure->company_id);
-        return view('departure.show', compact('departure', 'students', 'company'));
+        $letter   = Company::select('letter_number')->where('id', $departure->letter_id);
+        return view('departure.show', compact('departure', 'students', 'company', 'letter'));
     }
 
     /**

@@ -13,6 +13,7 @@
   @endpush
     <form method="post" action="{{url('departure')}}">
       {{ csrf_field() }}
+      <input type="hidden" name="letter_id" value="0">
       <div class="form-group row">
         <div class="col-md-5">
           <label for="exampleInputName">Nomor surat</label>

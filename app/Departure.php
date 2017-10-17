@@ -14,4 +14,8 @@ class Departure extends Model
   {
     return $this->belongsTo(Company::class, 'company_id');
   }
+  public function letter()
+  {
+    return $this->belongsTo(Letter::class, 'letter_id');
+  }
 }

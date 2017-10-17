@@ -13,13 +13,12 @@
               { data: 'letter.letter_number'},
               { data: 'students.name'},
               { data: 'company.company'},
-              @if (Auth::guest())
-              { data: 'departure_date'}
-              @elseif (Auth::guard('admin'))
               { data: 'departure_date'},
-              { data: 'action',orderable:false, searchable:false}
+              @if (Auth::user())
+                { data: 'letter.status'},
+                { data: 'action',orderable:false, searchable:false}
               @else
-              // User
+                { data: 'letter.status'}
               @endif
           ]
       });
