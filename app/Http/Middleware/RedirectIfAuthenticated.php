@@ -17,10 +17,20 @@ class RedirectIfAuthenticated
      */
     public function handle($request, Closure $next, $guard = null)
     {
+      switch ($guard) {
+        case 'student':
         if (Auth::guard($guard)->check()) {
-            return redirect('/');
+          return redirect()->route('student.index');
         }
+        break;
 
-        return $next($request);
+        default:
+        if (Auth::guard($guard)->check()) {
+          return redirect()->route('home');
+        }
+        break;
+      }
+
+      return $next($request);
     }
 }
