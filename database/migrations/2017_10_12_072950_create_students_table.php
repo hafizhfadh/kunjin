@@ -19,6 +19,7 @@ class CreateStudentsTable extends Migration
             $table->string('name');
             $table->string('class');
             $table->string('email');
+            $table->string('password');
         });
     }
 
