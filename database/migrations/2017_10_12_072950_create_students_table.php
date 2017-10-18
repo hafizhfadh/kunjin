@@ -18,8 +18,9 @@ class CreateStudentsTable extends Migration
             $table->bigInteger('nipd');
             $table->string('name');
             $table->string('class');
-            $table->string('email');
+            $table->string('email')->unique();
             $table->string('password');
+            $table->timestamps();
         });
     }
 

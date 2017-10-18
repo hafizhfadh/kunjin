@@ -32,8 +32,6 @@
       @guest
       @else
         <a href="{{url('departure/create')}}" class="btn btn-primary" data-toggle="tooltip" title="Tambah" ><i class="fa fa-plus"></i></a>
-        <a href="{{url('departure/create')}}" class="btn btn-primary" data-toggle="tooltip" title="Import excel" ><i class="fa fa-upload"></i></a>
-        <a href="{{url('departure/create')}}" class="btn btn-primary" data-toggle="tooltip" title="Export excel" ><i class="fa fa-download"></i></a>
       @endguest
     </div>
     <div class="card-body">

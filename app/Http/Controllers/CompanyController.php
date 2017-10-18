@@ -19,10 +19,10 @@ class CompanyController extends Controller
       $query = Company::select(['*']);
 
       return Datatables::of($query)
-                        ->addColumn('action', function($items){
-                          return '';
+                        ->addColumn('action', function($data){
+                          $data = $data;
+                          return view('form.form_company', compact('data'));
                         })
-                        ->rawColumns(['action'])
                         ->make(true);
     }
 
@@ -53,9 +53,10 @@ class CompanyController extends Controller
           'company' => 'required',
           'contact' => 'required',
           'address' => 'required',
-          'company_pic' => 'required'
+          'company_pic' => ''
         ]);
         Company::create($validate);
+        return back()->with('success', 'Data perusahaan berhasil ditambahkan.');
     }
 
     /**
@@ -95,7 +96,7 @@ class CompanyController extends Controller
         'company' => 'required',
         'contact' => 'required',
         'address' => 'required',
-        'company_pic' => 'required'
+        'company_pic' => ''
       ]);
       Company::find($id)->update($validate);
     }
@@ -109,5 +110,6 @@ class CompanyController extends Controller
     public function destroy($id)
     {
         Company::find($id)->delete();
+        return 'success';
     }
 }

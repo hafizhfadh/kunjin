@@ -18,6 +18,7 @@ Route::resource('dashboard', 'DashboardController');
 Route::resource('departure', 'DepartureController');
 Route::resource('company', 'CompanyController');
 Route::resource('letter', 'LetterController');
+Route::resource('student', 'StudentController');
 
 Route::prefix('/student')->group(function () {
   // Login Routes
@@ -25,8 +26,7 @@ Route::prefix('/student')->group(function () {
   Route::post('/login', 'Auth\StudentLoginController@login')->name('student.login.submit');
   Route::get('/logout', 'Auth\StudentLoginController@logout')->name('student.logout');
 
-  // Student Reasource
-  Route::resource('/', 'StudentController');
+
 
   // Password Reset routes
   Route::post('/password/email', 'Auth\StudentForgotPasswordController@sendResetLinkEmail')->name('student.password.email');

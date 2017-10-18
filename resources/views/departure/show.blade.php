@@ -8,37 +8,52 @@
       <a href="#" class="btn btn-secondary" pull-right><i class="fa fa-print"></i></a>
     </div>
     <div class="card-body">
-
       <div class="row">
         <div class="col-md-12">
           @php
-          if ($departure->letter->status == "Permohonan surat"){
-            $val = 'Pemrosesan surat';
-          }
-          elseif($departure->status == "Pemrosesan surat"){
-            $val = 'Boleh berangkat';
-          }
+          $vals = '';
+          $valf = '';
+          $btval= '';
+          if ($departure->letter->status == 'Permohonan surat'){
+            $vals = 'Pemrosesan surat';
 
-          elseif($departure->status == "Boleh berangkat"){
-            $val = ''
+          }elseif($departure->letter->status == 'Pemrosesan surat'){
+            $vals = 'Boleh berangkat';
+          }elseif($departure->letter->status == 'Boleh berangkat'){
+            $vals = 'Pengumpulan laporan';
+            $valf = 'Gagal';
+            $btval= 'Gagal';
+          }elseif($departure->letter->status == 'Gagal'){
+            $valf = 'Permohonan surat';
+            $btval= 'Permohonan surat lagi';
+          }elseif($departure->letter->status == 'Pengumpulan laporan'){
+            $vals = 'Selesai';
           }
-
-          elseif($departure->status == "Gagal"){
-
-          }
-
-          elseif($departure->status == "Pengumpulan laporan"){
-
-          }
-          else{
-
-          }
-          @endphp
-          <form class="" action="index.html" method="post">
-            {{ csrf_field() }}
-            <input type="hidden" name="status" value="{{$val}}">
+          $forms = '
+          <form method="POST" action="'.url('letter/'.$departure->letter_id).'">
+            '.csrf_field().'
+            <input name="_method" type="hidden" value="PATCH">
+            <input type="hidden" name="status" value="'.$vals.'">
             <button type="submit" class="btn btn-success float-md-right">Konfirmasi status <i class="fa fa-check"></i></button>
           </form>
+          ';
+          $formf = '
+          <form method="POST" action="'.url('letter/'.$departure->letter_id).'">
+            '.csrf_field().'
+            <input name="_method" type="hidden" value="PATCH">
+            <input type="hidden" name="status" value="'.$valf.'">
+            <button type="submit" class="btn btn-danger float-md-right">'.$btval.' <i class="fa fa-close"></i></button>
+          </form>
+          ';
+          if (!empty($vals) && !empty($valf)) {
+            echo $formf;
+            echo $forms;
+          }elseif(!empty($vals)){
+            echo $forms;
+          }elseif(!empty($valf)){
+            echo $formf;
+          }
+          @endphp
         </div>
         <div class="col-md-8">
           <div class="card-header">

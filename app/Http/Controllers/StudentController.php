@@ -22,6 +22,10 @@ class StudentController extends Controller
     {
       $test = Student::select(['*']);
       return Datatables::of($test)
+                         ->addColumn('action', function($data){
+                           $data = $data;
+                           return view('form.form_student', compact('data'));
+                         })
                          ->make(true);
     }
 
@@ -32,7 +36,7 @@ class StudentController extends Controller
      */
     public function create()
     {
-        //
+        return view('student.create');
     }
 
     /**
@@ -43,7 +47,14 @@ class StudentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $input = request()->validate([
+          'nipd' => 'required|numeric',
+          'name' => 'required|string',
+          'class'=> 'required|string|max:15',
+          'email'=> 'required|unique:students,email'
+        ]);
+        Student::create($input);
+        return back()->with('success', 'Data murid berhasil ditambahkan.');
     }
 
     /**
@@ -54,7 +65,8 @@ class StudentController extends Controller
      */
     public function show($id)
     {
-        //
+        $student = Student::find($id);
+        return view('student.show', compact('student'));
     }
 
     /**
@@ -65,7 +77,8 @@ class StudentController extends Controller
      */
     public function edit($id)
     {
-        //
+      $student = Student::find($id);
+      return view('student.edit', compact('student'));
     }
 
     /**
@@ -77,7 +90,14 @@ class StudentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+      $input = request()->validate([
+        'nipd' => 'required|numeric',
+        'name' => 'required|string',
+        'class'=> 'required|string|max:15',
+        'email'=> 'required|unique:students,email'
+      ]);
+      Student::find($id)->update($input);
+      return back()->with('success', 'Data murid berhasil ditambahkan.');
     }
 
     /**
@@ -88,6 +108,7 @@ class StudentController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Student::find($id)->delete();
+        return 'success';
     }
 }

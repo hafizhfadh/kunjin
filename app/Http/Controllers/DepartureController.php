@@ -43,9 +43,9 @@ class DepartureController extends Controller
                          })
                          ->addColumn('action', function($departures){
                            $departure = $departures;
-                           return view('layouts.form', compact('departure'));
+                           return view('form.form_departure', compact('departure'));
                          })
-                         ->rawColumns(['action', 'letter.status'])
+                         ->rawColumns(['action'])
                          ->make(true);
     }
     /**
@@ -134,6 +134,7 @@ class DepartureController extends Controller
 
         $company  = Company::find($departure->company_id);
         $letter   = Letter::find($departure->letter_id);
+
         return view('departure.show', compact('departure', 'students', 'company', 'letter'));
     }
 
@@ -174,7 +175,7 @@ class DepartureController extends Controller
           ]);
       $request['student_id'] = json_encode($request['student_id']);
       $input = request()->except(['_token', '_method']);
-      $departure = Departure::where('id', $id)->update($input);;
+      $departure = Departure::where('id', $id)->update($input);
 
       return back()->with('success', 'Keberangkatan berhasil diubah.');
     }
@@ -188,6 +189,6 @@ class DepartureController extends Controller
     public function destroy($id)
     {
         Departure::find($id)->delete() && Letter::find($id)->delete();
-        return 'hehe';
+        return 'success';
     }
 }
