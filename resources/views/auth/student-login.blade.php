@@ -7,12 +7,12 @@
       <form class="form-horizontal" method="POST" action="{{ route('student.login.submit') }}">
           {{ csrf_field() }}
           <div class="form-group{{ $errors->has('student') ? ' has-error' : '' }}">
-              <label for="student" class="control-label">NIPD</label>
-                  <input id="student" type="text" class="form-control" name="student" value="{{ old('student') }}" required autofocus placeholder="NIPD...">
+              <label for="nipd" class="control-label">NIPD</label>
+                  <input id="nipd" type="text" class="form-control" name="nipd" value="{{ old('nipd') }}" required autofocus placeholder="NIPD...">
 
-                  @if ($errors->has('student'))
+                  @if ($errors->has('nipd'))
                       <span class="help-block">
-                          <strong>{{ $errors->first('student') }}</strong>
+                          <strong>{{ $errors->first('nipd') }}</strong>
                       </span>
                   @endif
           </div>

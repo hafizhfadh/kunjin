@@ -29,7 +29,7 @@ class StudentLoginController extends Controller
     // Attempt to log the user in
     if (Auth::guard('student')->attempt(['nipd' => $request->nipd, 'password' => $request->password], $request->remember)) {
         // if successful, then redirect to their intended location
-        return redirect()->intended(route('student.index'));
+        return redirect()->intended(route('dashboard.index'));
     }
     // if unsuccessful, then redirect back to login form
     return redirect()->back()->withInput($request->only('nipd', 'remember'));
