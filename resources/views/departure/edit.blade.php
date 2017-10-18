@@ -29,12 +29,14 @@
 
       <div class="form-group row">
         <div class="col-md-6">
-          <label for="exampleInputName">Peserta (ctrl+klik untuk pilih lebih dari 1)</label>
-          <p>{{implode(',',$stud)}}</p>
+          <label for="exampleInputName">Peserta</label>
 
           <select class="form-control" multiple="multiple" id="select2" name="student_id[]">
-            @foreach ($studentss as $s)
-              <option value="{{$s->id}}">{{$s->name}} {{$s->class}}</option>
+            @foreach ($student1 as $s1)
+              <option value="{{$s1->id}}" selected>{{$s1->name}} {{$s1->class}}</option>
+            @endforeach
+            @foreach ($student0 as $s0)
+              <option value="{{$s0->id}}">{{$s0->name}} {{$s0->class}}</option>
             @endforeach
           </select>
         </div>

@@ -79,13 +79,13 @@ class LetterController extends Controller
     public function update(Request $request, $id)
     {
         $company_id = $request->company_id;
-        $keterangan = $request->company_keterangan;
+        $status = $request->company_status;
         $input = request()->validate([
-          'keterangan' => 'required'
+          'status' => 'required'
         ]);
-        $company= Company::where('id', $company_id)->update(['keterangan'=>$keterangan]);
+        $company= Company::where('id', $company_id)->update(['status'=>$status]);
         $letter = Letter::where('id', $id)->update($input);
-        return back()->with('success', 'Keterangan berhasil di konfirmasi.');
+        return back()->with('success', 'Status berhasil di konfirmasi.');
     }
 
     /**
