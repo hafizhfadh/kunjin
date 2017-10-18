@@ -43,5 +43,5 @@
   });
 </script>
 <a class="btn btn-primary" href="{{url('departure/'.$departure->id)}}" data-toggle="tooltip" title="Lihat" ><i class="fa fa-search"></i></a>
-<a class="btn btn-success" href="{{url('departure/'.$departure->id.'/edit')}}" data-toggle="tooltip" title="Edit"><i class="fa fa-edit"></i></a>
+<a class="btn btn-warning" href="{{url('departure/'.$departure->id.'/edit')}}" data-toggle="tooltip" title="Edit"><i class="fa fa-edit"></i></a>
 <button class="btn btn-danger" id="delete-departure" value="{{$departure->id}}" data-toggle="tooltip" title="Hapus"><i class="fa fa-trash-o"></i></button>

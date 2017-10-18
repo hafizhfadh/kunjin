@@ -37,10 +37,6 @@ class DepartureController extends Controller
                              }
                              return $stud;
                          })
-                         ->editColumn('letter.status', function ($data) {
-                           $departure = $data;
-                           return view('layouts.status', compact('departure'));
-                        })
                          ->editColumn('departure_date', function($departures){
                            $date = date('d-m-Y', strtotime($departures->departure_date));
                            return $date;
@@ -49,7 +45,7 @@ class DepartureController extends Controller
                            $departure = $departures;
                            return view('layouts.form', compact('departure'));
                          })
-                         ->rawColumns(['action'])
+                         ->rawColumns(['action', 'letter.status'])
                          ->make(true);
     }
     /**
@@ -137,7 +133,7 @@ class DepartureController extends Controller
         $students = Student::find($student_id);
 
         $company  = Company::find($departure->company_id);
-        $letter   = Company::select('letter_number')->where('id', $departure->letter_id);
+        $letter   = Letter::find($departure->letter_id);
         return view('departure.show', compact('departure', 'students', 'company', 'letter'));
     }
 
