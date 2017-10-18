@@ -37,20 +37,19 @@ class DepartureController extends Controller
                              }
                              return $stud;
                          })
+                         ->editColumn('letter.status', function ($data) {
+                           $departure = $data;
+                           return view('layouts.status', compact('departure'));
+                        })
                          ->editColumn('departure_date', function($departures){
                            $date = date('d-m-Y', strtotime($departures->departure_date));
                            return $date;
                          })
-                         //if admin
                          ->addColumn('action', function($departures){
                            $departure = $departures;
-                          //  if ($departures->status == "Permohonan surat") {
-                          //    # code...
-                          //  }
                            return view('layouts.form', compact('departure'));
                          })
                          ->rawColumns(['action'])
-                         //endif
                          ->make(true);
     }
     /**
@@ -60,11 +59,27 @@ class DepartureController extends Controller
      */
     public function create()
     {
-        $departure = Departure::count('id')+1;
-        $surat = '2017/Hubin/Kunjin/Smk.tb/'.$departure;
+        $departures = Departure::all();
+        $result ="";
+        if (count($departures) > 0) {
+          foreach($departures as $d){
+            $student_id[] = json_decode($d->student_id);
+          }
+          $result = array();
+          foreach ($student_id as $array) {
+              $result = array_merge($result, $array);
+          }
+        }
+        //return $result;
+        $departure = Departure::select('company_id','student_id')->get();
+
+        $cdeparture = Departure::count('id')+1;
+        $surat = '2017/Hubin/Kunjin/Smk.tb/'.$cdeparture;
         $students = Student::select('id','name','class')->get();
+
+
         $companies  = Company::select('id','company')->get();
-        return view('departure.create',compact('departure', 'students', 'companies', 'surat'));
+        return view('departure.create',compact('departure', 'students', 'result', 'companies', 'surat'));
     }
 
     /**
@@ -100,6 +115,10 @@ class DepartureController extends Controller
       $depart->company_id    = $request->company_id;
       $depart->departure_date= $request->departure_date;
       $depart->save();
+
+      $company               = Company::find($request->company_id);
+      $company->status       = 'Sudah dikunjungi';
+      $company->save();
 
       return back()->with('success', 'Keberangkatan berhasil dibuat.');
     }
@@ -172,8 +191,7 @@ class DepartureController extends Controller
      */
     public function destroy($id)
     {
-        Departure::find($id)->delete();
-        Letter::find($id)->delete();
-        return back()->with('success', 'Keberangkatan berhasil dihapus.');
+        Departure::find($id)->delete() && Letter::find($id)->delete();
+        return 'hehe';
     }
 }

@@ -5,6 +5,7 @@
   <div class="card mb-3">
     <div class="card-header">
       <i class="fa fa-table"></i> Detail keberangkatan
+      <a href="#" class="btn btn-secondary" pull-right><i class="fa fa-print"></i></a>
     </div>
     <div class="card-body">
       <div class="row">
@@ -13,6 +14,7 @@
             <i class="fa fa-table"></i> Data murid
           </div>
           <div class="card-body">
+            <a href="#"><i class="fa fa-check"></i></a>
             <div class="row">
               @foreach ($students as $s)
                 <div class="col-md-6">

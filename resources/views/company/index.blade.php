@@ -13,7 +13,8 @@
               { data: 'company'},
               { data: 'address'},
               { data: 'contact'},
-              { data: 'company_pic'}
+              { data: 'company_pic'},
+              { data: 'status'}
           ]
       });
     });
@@ -21,11 +22,7 @@
   @endpush
   <div class="card mb-3">
     <div class="card-header">
-      <i class="fa fa-table"></i> Keberangkatan
-      @guest
-      @else
-        <a href="{{url('student/create')}}" class="btn btn-primary">Add</a>
-      @endguest
+      <i class="fa fa-company"></i> Perusahaan
     </div>
     <div class="card-body">
       <div class="table-responsive">
@@ -36,6 +33,7 @@
                     <th>Address</th>
                     <th>Contact</th>
                     <th>Picture</th>
+                    <th>Status</th>
                 </tr>
             </thead>
         </table>
