@@ -18,6 +18,8 @@
   <!-- Page level plugin CSS-->
   <link href="{{ asset('vendor/datatables/jquery.dataTables.min.css') }}" rel="stylesheet">
   <link href="{{ asset('vendor/datepicker/datepicker3.css') }}" rel="stylesheet">
+  <link href="{{ asset('vendor/select2/css/select2.min.css') }}" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/select2-bootstrap-theme/0.1.0-beta.10/select2-bootstrap.css" rel="stylesheet">
   <!-- Custom styles for this template-->
   <link href="{{ asset('css/sb-admin.css') }}" rel="stylesheet">
 </head>
@@ -115,8 +117,10 @@
   <script src="{{ asset('vendor/chart.js/Chart.min.js') }}"></script>
   <script src="{{ asset('vendor/datatables/jquery.dataTables.js') }}"></script>
   <script src="{{ asset('vendor/datepicker/bootstrap-datepicker.js') }}"></script>
+  <script src="{{ asset('vendor/select2/js/select2.min.js') }}"></script>
   <!-- Custom scripts for all pages-->
   <script src="{{ asset('js/sb-admin.js') }}"></script>
   @stack('scripts')
+  @stack('scriptcrud')
 </body>
 </html>

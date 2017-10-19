@@ -13,7 +13,14 @@
               { data: 'company'},
               { data: 'address'},
               { data: 'contact'},
-              { data: 'company_pic'}
+
+              @if (Auth::user())
+                { data: 'status'},
+                { data: 'action'}
+              @else
+                { data: 'status'}
+              @endif
+
           ]
       });
     });
@@ -21,10 +28,12 @@
   @endpush
   <div class="card mb-3">
     <div class="card-header">
-      <i class="fa fa-table"></i> Keberangkatan
+      <i class="fa fa-company"></i> Perusahaan
       @guest
       @else
-        <a href="{{url('student/create')}}" class="btn btn-primary">Add</a>
+        <a href="{{url('company/create')}}" class="btn btn-primary" data-toggle="tooltip" title="Tambah" ><i class="fa fa-plus"></i></a>
+        <a href="{{url('company/create')}}" class="btn btn-primary" data-toggle="tooltip" title="Import excel" ><i class="fa fa-upload"></i></a>
+        <a href="{{url('company/create')}}" class="btn btn-primary" data-toggle="tooltip" title="Export excel" ><i class="fa fa-download"></i></a>
       @endguest
     </div>
     <div class="card-body">
@@ -32,10 +41,13 @@
         <table class="table table-bordered" id="users">
             <thead>
                 <tr>
-                    <th>Companies Name</th>
-                    <th>Address</th>
-                    <th>Contact</th>
-                    <th>Picture</th>
+                    <th>Nama perusahaan</th>
+                    <th>Alamat</th>
+                    <th>Kontak</th>
+                    <th>Status</th>
+                    @if (Auth::user())
+                      <th>Aksi</th>
+                    @endif
                 </tr>
             </thead>
         </table>

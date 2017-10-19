@@ -5,6 +5,7 @@
   @push('scripts')
     <script>
     $(document).ready(function(){
+      $('[data-toggle="tooltip"]').tooltip();
       $('#users').DataTable({
           processing: true,
           serverSide: false,
@@ -13,13 +14,12 @@
               { data: 'letter.letter_number'},
               { data: 'students.name'},
               { data: 'company.company'},
-              @if (Auth::guest())
-              { data: 'departure_date'}
-              @elseif (Auth::guard('admin'))
               { data: 'departure_date'},
-              { data: 'action',orderable:false, searchable:false}
+              @if (Auth::user())
+                { data: 'letter.status'},
+                { data: 'action',orderable:false, searchable:false}
               @else
-              // User
+                { data: 'letter.status'}
               @endif
           ]
       });
@@ -31,7 +31,7 @@
       <i class="fa fa-table"></i> Keberangkatan
       @guest
       @else
-        <a href="{{url('departure/create')}}" class="btn btn-primary">Add</a>
+        <a href="{{url('departure/create')}}" class="btn btn-primary" data-toggle="tooltip" title="Tambah" ><i class="fa fa-plus"></i></a>
       @endguest
     </div>
     <div class="card-body">

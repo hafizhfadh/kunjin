@@ -8,11 +8,19 @@
         $('#pickyDate').datepicker({
             format: "yyyy-mm-dd"
           });
+        $('#select2').select2({
+          theme: "bootstrap"
+        });
+        $('#basic-single').select2({
+          theme: "bootstrap"
+        });
       });
     </script>
   @endpush
     <form method="post" action="{{url('departure')}}">
       {{ csrf_field() }}
+      <input type="hidden" name="letter_id" value="1">
+      <input type="hidden" name="status" value="1">
       <div class="form-group row">
         <div class="col-md-5">
           <label for="exampleInputName">Nomor surat</label>
@@ -21,20 +29,22 @@
       </div>
 
       <div class="form-group row">
-        <div class="col-md-6">
-          <label for="exampleInputName">Peserta (ctrl+klik untuk pilih lebih dari 1)</label>
-          <select class="form-control" multiple="multiple" name="student_id[]">
-            @foreach ($students as $s)
-              <option value="{{$s->id}}">{{$s->name}}</option>
-            @endforeach
-          </select>
+        <div class="col-md-5">
+          <label>Peserta</label>
+          <p>
+            <select class="form-control" id="select2" multiple="multiple" name="student_id[]">
+              @foreach ($students as $s)
+                <option value="{{$s->id}}">{{$s->name}}</option>
+              @endforeach
+            </select>
+          </p>
         </div>
       </div>
 
       <div class="form-group row">
         <div class="col-md-5">
           <label for="exampleInputName">Perusahaan</label>
-          <select class="form-control" name="company_id">
+          <select class="form-control" id="basic-single" name="company_id">
             @foreach ($companies as $c)
               <option value="{{$c->id}}">{{$c->company}}</option>
             @endforeach

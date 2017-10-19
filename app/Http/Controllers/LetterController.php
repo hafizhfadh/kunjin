@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-<<<<<<< HEAD
-=======
-use App\Letter;
->>>>>>> 2cc98d3b492db1266c6686eaa7dbad43905fb3e8
 use Illuminate\Http\Request;
+
+use App\Letter;
+use App\Company;
 
 class LetterController extends Controller
 {
@@ -17,9 +16,6 @@ class LetterController extends Controller
      */
     public function index()
     {
-<<<<<<< HEAD
-        //
-=======
         return view('letter.index');
     }
 
@@ -28,7 +24,6 @@ class LetterController extends Controller
       $test = Letter::select(['*']);
       return Datatables::of($test)
                          ->make(true);
->>>>>>> 2cc98d3b492db1266c6686eaa7dbad43905fb3e8
     }
 
     /**
@@ -83,7 +78,14 @@ class LetterController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $company_id = $request->company_id;
+        $status = $request->company_status;
+        $input = request()->validate([
+          'status' => 'required'
+        ]);
+        $company= Company::where('id', $company_id)->update(['status'=>$status]);
+        $letter = Letter::where('id', $id)->update($input);
+        return back()->with('success', 'Status berhasil di konfirmasi.');
     }
 
     /**
