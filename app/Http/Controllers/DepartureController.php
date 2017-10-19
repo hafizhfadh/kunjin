@@ -74,7 +74,7 @@ class DepartureController extends Controller
         $students = Student::select('id','name','class')->where('status',0)->get();
 
 
-        $companies  = Company::select('id','company')->where('status',0)->get();
+        $companies  = Company::select('id','company')->where('status','Belum dikunjungi')->get();
         return view('departure.create',compact('departure', 'students', 'result', 'companies', 'surat'));
     }
 
@@ -89,7 +89,6 @@ class DepartureController extends Controller
       $input = request()->validate([
               'letter_id'     => 'required',
               'letter_number' => 'required',
-              'keterangan'        => 'required',
               'student_id'    => 'required|max:5',
               'company_id'    => 'required|exists:companies,id',
               'departure_date'=> 'required|date'
@@ -101,7 +100,7 @@ class DepartureController extends Controller
 
       $letter                = new Letter;
       $letter->letter_number = $surat;
-      $letter->status        = "Permohonan surat";
+      $letter->status    = "Permohonan surat";
       $letter->save();
 
       $letter_id = $letter->id;
@@ -115,8 +114,7 @@ class DepartureController extends Controller
       $depart->save();
 
       $company               = Company::find($request->company_id);
-      $company->keterangan   = 'Sudah dikunjungi';
-      $company->status       = 1;
+      $company->status       = 'Sedang dikunjungi';
       $company->save();
 
       return back()->with('success', 'Keberangkatan berhasil dibuat.');
@@ -149,17 +147,14 @@ class DepartureController extends Controller
      */
     public function edit($id)
     {
-        $departure = Departure::find($id);
+      $departure = Departure::find($id);
 
-        $id = json_decode($departure->student_id);
-        $students = Student::find($id);
-        foreach ($students as $s) {
-          $stud[] = $s->name;
-        }
+      $student_id = json_decode($departure->student_id);
+      $student1 = Student::find($student_id);
 
-        $studentss = Student::select('id','name', 'class')->get();
-        $companies  = Company::select('id','company')->get();
-        return view('departure.edit', compact('departure', 'studentss', 'companies', 'stud'));
+      $student0 = Student::select('id','name', 'class')->where('status',0)->get();
+      $companies  = Company::select('id','company')->where('status','Belum dikunjungi')->get();
+      return view('departure.edit', compact('departure', 'student1', 'student0', 'companies'));
     }
 
     /**
@@ -171,14 +166,25 @@ class DepartureController extends Controller
      */
     public function update(Request $request, $id)
     {
+      $departure = Departure::find($id);
+      $student_id = json_decode($departure->student_id);
+      Company::where('id', $departure->company_id)->update(['status'=>'Belum dikunjungi']);
+      Student::whereIn('id', $student_id)->update(['status'=>0]);
+
       $input = request()->validate([
               'student_id' => 'required',
               'company_id' => 'required|exists:companies,id',
               'departure_date' => 'required|date'
           ]);
-      $request['student_id'] = json_encode($request['student_id']);
-      $input = request()->except(['_token', '_method']);
-      $departure = Departure::where('id', $id)->update($input);
+
+      $departured = Departure::find($id);
+      $departured->student_id = json_encode($request->student_id);
+      $departured->company_id = $request->company_id;
+      $departured->departure_date = $request->departure_date;
+      $departured->save();
+
+      Company::where('id', $request->company_id)->update(['status'=>'Sedang dikunjungi']);
+      Student::whereIn('id', $request->student_id)->update(['status'=>1]);
 
       return back()->with('success', 'Keberangkatan berhasil diubah.');
     }
@@ -191,6 +197,11 @@ class DepartureController extends Controller
      */
     public function destroy($id)
     {
+        $departure = Departure::find($id);
+        $student_id = json_decode($departure->student_id);
+        Company::where('id', $departure->company_id)->update(['status'=>'Belum dikunjungi']);
+
+        Student::whereIn('id', $student_id)->update(['status'=>0]);
         Departure::find($id)->delete() && Letter::find($id)->delete();
         return 'success';
     }

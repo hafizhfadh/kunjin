@@ -15,7 +15,7 @@
               { data: 'contact'},
 
               @if (Auth::user())
-                { data: 'keterangan'},
+                { data: 'status'},
                 { data: 'action'}
               @else
                 { data: 'keterangan'}
