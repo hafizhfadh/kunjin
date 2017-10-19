@@ -20,7 +20,7 @@ class RedirectIfAuthenticated
       switch ($guard) {
         case 'student':
         if (Auth::guard($guard)->check()) {
-          return redirect()->route('student.index');
+          return redirect()->route('index');
         }
         break;
 
