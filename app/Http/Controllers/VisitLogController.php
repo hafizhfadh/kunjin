@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\VisitsLog;
+use App\VisitLog;
 use Illuminate\Http\Request;
 
-class VisitsLogController extends Controller
+class VisitLogController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,10 +41,10 @@ class VisitsLogController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\VisitsLog  $visitsLog
+     * @param  \App\VisitLog  $visitLog
      * @return \Illuminate\Http\Response
      */
-    public function show(VisitsLog $visitsLog)
+    public function show(VisitLog $visitLog)
     {
         //
     }
@@ -52,10 +52,10 @@ class VisitsLogController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\VisitsLog  $visitsLog
+     * @param  \App\VisitLog  $visitLog
      * @return \Illuminate\Http\Response
      */
-    public function edit(VisitsLog $visitsLog)
+    public function edit(VisitLog $visitLog)
     {
         //
     }
@@ -64,10 +64,10 @@ class VisitsLogController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\VisitsLog  $visitsLog
+     * @param  \App\VisitLog  $visitLog
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, VisitsLog $visitsLog)
+    public function update(Request $request, VisitLog $visitLog)
     {
         //
     }
@@ -75,10 +75,10 @@ class VisitsLogController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\VisitsLog  $visitsLog
+     * @param  \App\VisitLog  $visitLog
      * @return \Illuminate\Http\Response
      */
-    public function destroy(VisitsLog $visitsLog)
+    public function destroy(VisitLog $visitLog)
     {
         //
     }
