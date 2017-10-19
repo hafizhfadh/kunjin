@@ -18,7 +18,6 @@ Route::resource('dashboard', 'DashboardController');
 Route::resource('departure', 'DepartureController');
 Route::resource('company', 'CompanyController');
 Route::resource('letter', 'LetterController');
-Route::resource('student', 'StudentController');
 
 Route::post('student/importExcel', 'StudentController@importExcel');
 Route::get('student/exportExcel/{type}', 'StudentController@exportExcel');
@@ -31,11 +30,25 @@ Route::prefix('/student')->group(function () {
   Route::get('/login', 'Auth\StudentLoginController@showLoginForm')->name('student.login');
   Route::post('/login', 'Auth\StudentLoginController@login')->name('student.login.submit');
   Route::get('/logout', 'Auth\StudentLoginController@logout')->name('student.logout');
+  Route::resource('/', 'StudentController');
   // Password Reset routes
   Route::post('/password/email', 'Auth\StudentForgotPasswordController@sendResetLinkEmail')->name('student.password.email');
   Route::get('/password/reset', 'Auth\StudentForgotPasswordController@showLinkRequestForm')->name('student.password.request');
   Route::post('/password/reset', 'Auth\StudentResetPasswordController@reset');
   Route::get('/password/reset/{token}', 'Auth\StudentResetPasswordController@showResetForm')->name('student.password.reset');
+});
+
+Route::prefix('/teacher')->group(function () {
+  // Login Routes
+  Route::get('/login', 'Auth\TeacherLoginController@showLoginForm')->name('teacher.login');
+  Route::post('/login', 'Auth\TeacherLoginController@login')->name('teacher.login.submit');
+  Route::get('/logout', 'Auth\TeacherLoginController@logout')->name('teacher.logout');
+  Route::resource('/', 'TeacherController');
+  // Password Reset routes
+  Route::post('/password/email', 'Auth\TeacherForgotPasswordController@sendResetLinkEmail')->name('teacher.password.email');
+  Route::get('/password/reset', 'Auth\TeacherForgotPasswordController@showLinkRequestForm')->name('teacher.password.request');
+  Route::post('/password/reset', 'Auth\TeacherResetPasswordController@reset');
+  Route::get('/password/reset/{token}', 'Auth\TeacherResetPasswordController@showResetForm')->name('teacher.password.reset');
 });
 
 Route::get('resource/company-data', 'CompanyController@data');
