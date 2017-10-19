@@ -29,10 +29,6 @@
             $valfc= 'Belum dikunjungi';
             $valf = 'Gagal';
             $btval= 'Gagal';
-          }elseif($departure->letter->status == 'Gagal'){
-            $valf = 'Permohonan surat';
-            $valfc= 'Belum dikunjungi';
-            $btval= 'Permohonan surat lagi';
           }elseif($departure->letter->status == 'Pengumpulan laporan'){
             $vals = 'Selesai';
             $valsc= 'Sudah dikunjungi';
@@ -43,7 +39,7 @@
             <input name="_method" type="hidden" value="PATCH">
             <input type="hidden" name="status" value="'.$vals.'">
             <input type="hidden" name="company_status" value="'.$valsc.'">
-            <input type="hidden" name="company_id" value="'.$departure->company_id.'">
+            <input type="hidden" name="departure_id" value="'.$departure->id.'">
             <button type="submit" class="btn btn-success float-md-right">Konfirmasi status <i class="fa fa-check"></i></button>
           </form>
           ';
@@ -53,7 +49,7 @@
             <input name="_method" type="hidden" value="PATCH">
             <input type="hidden" name="status" value="'.$valf.'">
             <input type="hidden" name="company_status" value="'.$valfc.'">
-            <input type="hidden" name="company_id" value="'.$departure->company_id.'">
+            <input type="hidden" name="departure_id" value="'.$departure->id.'">
             <button type="submit" class="btn btn-danger float-md-right">'.$btval.' <i class="fa fa-close"></i></button>
           </form>
           ';
@@ -62,8 +58,6 @@
             echo $forms;
           }elseif(!empty($vals)){
             echo $forms;
-          }elseif(!empty($valf)){
-            echo $formf;
           }
           @endphp
         </div>
@@ -80,7 +74,7 @@
                   <table class="table table-responsive">
                     <tr>
                       <td>NIPD:</td>
-                      <td>{{$s->nipd}}</td>
+                      <td>{{$s->id}}</td>
                     </tr>
                     <tr>
                       <td>Nama:</td>

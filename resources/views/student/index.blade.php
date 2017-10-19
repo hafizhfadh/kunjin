@@ -12,7 +12,7 @@
           serverSide: false,
           ajax: '{{ url('resource/student-data') }}',
           columns: [
-              { data: 'nipd'},
+              { data: 'id'},
               { data: 'name'},
               { data: 'class'},
               @if (Auth::user())

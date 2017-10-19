@@ -10,7 +10,7 @@ class Student extends Authenticatable
 {
   use Notifiable;
     protected $table = 'students';
-
+    public $incrementing = false;
     protected $fillable = [
         'nipd', 'name', 'class', 'email', 'password'
     ];

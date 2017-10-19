@@ -2,14 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\VisitsLog;
 use Illuminate\Http\Request;
 
-use App\Letter;
-use App\Company;
-use App\Student;
-use App\Departure;
-
-class LetterController extends Controller
+class VisitsLogController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,14 +14,7 @@ class LetterController extends Controller
      */
     public function index()
     {
-        return view('letter.index');
-    }
-
-    public function data(Datatables $datatables)
-    {
-      $test = Letter::select(['*']);
-      return Datatables::of($test)
-                         ->make(true);
+        //
     }
 
     /**
@@ -52,10 +41,10 @@ class LetterController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\VisitsLog  $visitsLog
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(VisitsLog $visitsLog)
     {
         //
     }
@@ -63,10 +52,10 @@ class LetterController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\VisitsLog  $visitsLog
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(VisitsLog $visitsLog)
     {
         //
     }
@@ -75,32 +64,21 @@ class LetterController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\VisitsLog  $visitsLog
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, VisitsLog $visitsLog)
     {
-        Letter::where('id', $id)->update(['status'=>$request->status]);
-
-        $departure = Departure::find($request->departure_id);
-        $student_id= json_decode($departure->student_id);
-        $company_id= $departure->company_id;
-
-        Company::where('id', $company_id)->update(['status'=>$request->company_status]);
-        if ($request->status == 'Gagal') {
-          Student::whereIn('id', $student_id)->update(['status'=>0]);
-        }
-
-        return back()->with('success', 'Status berhasil di konfirmasi.');
+        //
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\VisitsLog  $visitsLog
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(VisitsLog $visitsLog)
     {
         //
     }
