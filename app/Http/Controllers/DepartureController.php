@@ -71,10 +71,10 @@ class DepartureController extends Controller
 
         $cdeparture = Departure::count('id')+1;
         $surat = '2017/Hubin/Kunjin/Smk.tb/'.$cdeparture;
-        $students = Student::select('id','name','class')->get();
+        $students = Student::select('id','name','class')->where('status',0)->get();
 
 
-        $companies  = Company::select('id','company')->get();
+        $companies  = Company::select('id','company')->where('status',0)->get();
         return view('departure.create',compact('departure', 'students', 'result', 'companies', 'surat'));
     }
 
@@ -97,9 +97,11 @@ class DepartureController extends Controller
       $departure = Departure::count('id')+1;
       $surat = '2017/Hubin/Kunjin/Smk.tb/'.$departure;
 
+      Student::whereIn('id', $request->student_id)->update(['status'=>1]);
+
       $letter                = new Letter;
       $letter->letter_number = $surat;
-      $letter->keterangan        = "Permohonan surat";
+      $letter->status        = "Permohonan surat";
       $letter->save();
 
       $letter_id = $letter->id;
@@ -113,7 +115,8 @@ class DepartureController extends Controller
       $depart->save();
 
       $company               = Company::find($request->company_id);
-      $company->keterangan       = 'Sudah dikunjungi';
+      $company->keterangan   = 'Sudah dikunjungi';
+      $company->status       = 1;
       $company->save();
 
       return back()->with('success', 'Keberangkatan berhasil dibuat.');

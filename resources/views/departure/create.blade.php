@@ -20,7 +20,7 @@
     <form method="post" action="{{url('departure')}}">
       {{ csrf_field() }}
       <input type="hidden" name="letter_id" value="1">
-      <input type="hidden" name="status" value="1">
+      <input type="hidden" name="keterangan" value="1">
       <div class="form-group row">
         <div class="col-md-5">
           <label for="exampleInputName">Nomor surat</label>
@@ -34,9 +34,7 @@
           <p>
             <select class="form-control" id="select2" multiple="multiple" name="student_id[]">
               @foreach ($students as $s)
-                @if ($s->status == 0)
-                  <option value="{{$s->id}}">{{$s->name}}</option>
-                @endif
+                <option value="{{$s->id}}">{{$s->name}}</option>
               @endforeach
             </select>
           </p>
@@ -48,9 +46,7 @@
           <label for="exampleInputName">Perusahaan</label>
           <select class="form-control" id="basic-single" name="company_id">
             @foreach ($companies as $c)
-              @if ($c->status == 0)
-                <option value="{{$c->id}}">{{$c->company}}</option>
-              @endif
+              <option value="{{$c->id}}">{{$c->company}}</option>
             @endforeach
           </select>
         </div>
