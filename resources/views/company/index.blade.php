@@ -18,7 +18,7 @@
                 { data: 'status'},
                 { data: 'action'}
               @else
-                { data: 'keterangan'}
+                { data: 'status'}
               @endif
 
           ]

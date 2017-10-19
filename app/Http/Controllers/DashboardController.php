@@ -18,7 +18,7 @@ class DashboardController extends Controller
     {
       $pending = Student::select('status')->where('status', 0)->count();
       $depart = Student::select('status')->where('status', 1)->count();
-      $availableComp = Company::select('keterangan')->where('keterangan', 'Belum dikunjungi')->count();
+      $availableComp = Company::select('status')->where('status', 'Belum dikunjungi')->count();
       $requestLetter = Letter::select('status')->where('status', 'Permohonan surat')->count();
       return view('dashboard', compact('pending', 'depart', 'availableComp', 'requestLetter'));
     }
