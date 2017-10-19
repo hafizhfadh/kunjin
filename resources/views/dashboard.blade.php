@@ -51,7 +51,9 @@
             <div class="card-body-icon">
               <i class="fa fa-fw fa-users"></i>
             </div>
-            <div class="mr-5">26 Belum Berangkat!</div>
+            <div class="mr-5">
+              {{ $pending }} Belum Berangkat!
+            </div>
           </div>
           <a class="card-footer text-white clearfix small z-1" href="#">
             <span class="float-left">View Details</span>
@@ -67,7 +69,7 @@
             <div class="card-body-icon">
               <i class="fa fa-fw fa-list"></i>
             </div>
-            <div class="mr-5">11 Pending!</div>
+            <div class="mr-5">{{ $requestLetter }} Pending!</div>
           </div>
           <a class="card-footer text-white clearfix small z-1" href="#">
             <span class="float-left">View Details</span>
@@ -83,7 +85,7 @@
             <div class="card-body-icon">
               <i class="fa fa-fw fa-car"></i>
             </div>
-            <div class="mr-5">123 Sudah Berangkat!</div>
+            <div class="mr-5">{{ $depart }} Sudah Berangkat!</div>
           </div>
           <a class="card-footer text-white clearfix small z-1" href="#">
             <span class="float-left">View Details</span>
@@ -99,7 +101,7 @@
             <div class="card-body-icon">
               <i class="fa fa-fw fa-building"></i>
             </div>
-            <div class="mr-5">13 Perusahaan Tersedia!</div>
+            <div class="mr-5">{{ $availableComp }} Perusahaan Tersedia!</div>
           </div>
           <a class="card-footer text-white clearfix small z-1" href="#">
             <span class="float-left">View Details</span>

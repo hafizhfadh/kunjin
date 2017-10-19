@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Student;
+use App\Company;
+use App\Letter;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
@@ -13,7 +16,11 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        return view('dashboard');
+      $pending = Student::select('status')->where('status', 0)->count();
+      $depart = Student::select('status')->where('status', 1)->count();
+      $availableComp = Company::select('keterangan')->where('keterangan', 'Belum dikunjungi')->count();
+      $requestLetter = Letter::select('status')->where('status', 'Permohonan surat')->count();
+      return view('dashboard', compact('pending', 'depart', 'availableComp', 'requestLetter'));
     }
 
     /**
