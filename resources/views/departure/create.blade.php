@@ -34,7 +34,9 @@
           <p>
             <select class="form-control" id="select2" multiple="multiple" name="student_id[]">
               @foreach ($students as $s)
-                <option value="{{$s->id}}">{{$s->name}}</option>
+                @if ($s->status == 0)
+                  <option value="{{$s->id}}">{{$s->name}}</option>
+                @endif
               @endforeach
             </select>
           </p>
@@ -46,7 +48,9 @@
           <label for="exampleInputName">Perusahaan</label>
           <select class="form-control" id="basic-single" name="company_id">
             @foreach ($companies as $c)
-              <option value="{{$c->id}}">{{$c->company}}</option>
+              @if ($c->status == 0)
+                <option value="{{$c->id}}">{{$c->company}}</option>
+              @endif
             @endforeach
           </select>
         </div>

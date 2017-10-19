@@ -19,7 +19,8 @@ class CreateCompaniesTable extends Migration
             $table->text('address');
             $table->string('contact');
             $table->string('company_pic');
-            $table->string('status')->default('Belum dikunjungi');
+            $table->string('keterangan')->default('Belum dikunjungi');
+            $table->integer('status')->default(0);
             $table->timestamps();
         });
     }

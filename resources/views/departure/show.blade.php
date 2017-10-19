@@ -16,24 +16,24 @@
           $valsc= '';
           $valfc= '';
           $btval= '';
-          if ($departure->letter->status == 'Permohonan surat'){
+          if ($departure->letter->keterangan == 'Permohonan surat'){
             $vals = 'Pemrosesan surat';
             $valsc= 'Sudah dikunjungi';
 
-          }elseif($departure->letter->status == 'Pemrosesan surat'){
+          }elseif($departure->letter->keterangan == 'Pemrosesan surat'){
             $vals = 'Boleh berangkat';
             $valsc= 'Sudah dikunjungi';
-          }elseif($departure->letter->status == 'Boleh berangkat'){
+          }elseif($departure->letter->keterangan == 'Boleh berangkat'){
             $vals = 'Pengumpulan laporan';
             $valsc= 'Sudah dikunjungi';
             $valfc= 'Belum dikunjungi';
             $valf = 'Gagal';
             $btval= 'Gagal';
-          }elseif($departure->letter->status == 'Gagal'){
+          }elseif($departure->letter->keterangan == 'Gagal'){
             $valf = 'Permohonan surat';
             $valfc= 'Belum dikunjungi';
             $btval= 'Permohonan surat lagi';
-          }elseif($departure->letter->status == 'Pengumpulan laporan'){
+          }elseif($departure->letter->keterangan == 'Pengumpulan laporan'){
             $vals = 'Selesai';
             $valsc= 'Sudah dikunjungi';
           }
@@ -41,18 +41,18 @@
           <form method="POST" action="'.url('letter/'.$departure->letter_id).'">
             '.csrf_field().'
             <input name="_method" type="hidden" value="PATCH">
-            <input type="hidden" name="status" value="'.$vals.'">
-            <input type="hidden" name="company_status" value="'.$valsc.'">
+            <input type="hidden" name="keterangan" value="'.$vals.'">
+            <input type="hidden" name="company_keterangan" value="'.$valsc.'">
             <input type="hidden" name="company_id" value="'.$departure->company_id.'">
-            <button type="submit" class="btn btn-success float-md-right">Konfirmasi status <i class="fa fa-check"></i></button>
+            <button type="submit" class="btn btn-success float-md-right">Konfirmasi keterangan <i class="fa fa-check"></i></button>
           </form>
           ';
           $formf = '
           <form method="POST" action="'.url('letter/'.$departure->letter_id).'">
             '.csrf_field().'
             <input name="_method" type="hidden" value="PATCH">
-            <input type="hidden" name="status" value="'.$valf.'">
-            <input type="hidden" name="company_status" value="'.$valfc.'">
+            <input type="hidden" name="keterangan" value="'.$valf.'">
+            <input type="hidden" name="company_keterangan" value="'.$valfc.'">
             <input type="hidden" name="company_id" value="'.$departure->company_id.'">
             <button type="submit" class="btn btn-danger float-md-right">'.$btval.' <i class="fa fa-close"></i></button>
           </form>
@@ -72,7 +72,7 @@
             <i class="fa fa-table"></i> Data murid
           </div>
           <div class="card-body">
-            <p>Status &nbsp;&nbsp;&nbsp;&nbsp;: {{$letter->status}}</p>
+            <p>keterangan &nbsp;&nbsp;&nbsp;&nbsp;: {{$letter->keterangan}}</p>
             <p>No surat : {{$letter->letter_number}}</p>
             <div class="row">
               @foreach ($students as $s)

@@ -15,10 +15,10 @@
               { data: 'contact'},
 
               @if (Auth::user())
-                { data: 'status'},
+                { data: 'keterangan'},
                 { data: 'action'}
               @else
-                { data: 'status'}
+                { data: 'keterangan'}
               @endif
 
           ]
@@ -44,7 +44,7 @@
                     <th>Nama perusahaan</th>
                     <th>Alamat</th>
                     <th>Kontak</th>
-                    <th>Status</th>
+                    <th>Keterangan</th>
                     @if (Auth::user())
                       <th>Aksi</th>
                     @endif

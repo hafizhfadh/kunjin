@@ -89,7 +89,7 @@ class DepartureController extends Controller
       $input = request()->validate([
               'letter_id'     => 'required',
               'letter_number' => 'required',
-              'status'        => 'required',
+              'keterangan'        => 'required',
               'student_id'    => 'required|max:5',
               'company_id'    => 'required|exists:companies,id',
               'departure_date'=> 'required|date'
@@ -99,7 +99,7 @@ class DepartureController extends Controller
 
       $letter                = new Letter;
       $letter->letter_number = $surat;
-      $letter->status        = "Permohonan surat";
+      $letter->keterangan        = "Permohonan surat";
       $letter->save();
 
       $letter_id = $letter->id;
@@ -113,7 +113,7 @@ class DepartureController extends Controller
       $depart->save();
 
       $company               = Company::find($request->company_id);
-      $company->status       = 'Sudah dikunjungi';
+      $company->keterangan       = 'Sudah dikunjungi';
       $company->save();
 
       return back()->with('success', 'Keberangkatan berhasil dibuat.');
