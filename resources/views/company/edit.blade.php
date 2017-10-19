@@ -2,8 +2,9 @@
 
 @section('content')
   @include('layouts.message')
-    <form method="post" action="{{url('company')}}">
+    <form method="post" action="{{url('company/'.$company->id)}}">
       {{ csrf_field() }}
+      <input type="hidden" name="_method" value="PATCH">
       <div class="form-group row">
         <div class="col-md-5">
           <label for="exampleInputName">Perusahaan</label>

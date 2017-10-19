@@ -92,12 +92,12 @@ class CompanyController extends Controller
      */
     public function update(Request $request, $id)
     {
-      $validate = $this->validate($request,[
-        'company' => 'required',
-        'contact' => 'required',
-        'address' => 'required'
+      $input = request()->validate([
+        'company' => 'required|string',
+        'address' => 'required|string',
+        'contact'=> 'required|numeric'
       ]);
-      Company::find($id)->update($validate);
+      Student::find($id)->update($input);
     }
 
     /**
