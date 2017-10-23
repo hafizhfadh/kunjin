@@ -12,7 +12,7 @@ class Student extends Authenticatable
     protected $table = 'students';
     public $incrementing = false;
     protected $fillable = [
-        'nipd', 'name', 'class', 'email', 'password'
+        'id', 'name', 'class', 'email', 'password'
     ];
 
     public function departure()

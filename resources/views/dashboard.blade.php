@@ -55,12 +55,6 @@
               {{ $pending }} Belum Berangkat!
             </div>
           </div>
-          <a class="card-footer text-white clearfix small z-1" href="#">
-            <span class="float-left">View Details</span>
-            <span class="float-right">
-              <i class="fa fa-angle-right"></i>
-            </span>
-          </a>
         </div>
       </div>
       <div class="col-xl-3 col-sm-6 mb-3">
@@ -71,12 +65,6 @@
             </div>
             <div class="mr-5">{{ $requestLetter }} Pending!</div>
           </div>
-          <a class="card-footer text-white clearfix small z-1" href="#">
-            <span class="float-left">View Details</span>
-            <span class="float-right">
-              <i class="fa fa-angle-right"></i>
-            </span>
-          </a>
         </div>
       </div>
       <div class="col-xl-3 col-sm-6 mb-3">
@@ -87,12 +75,6 @@
             </div>
             <div class="mr-5">{{ $depart }} Sudah Berangkat!</div>
           </div>
-          <a class="card-footer text-white clearfix small z-1" href="#">
-            <span class="float-left">View Details</span>
-            <span class="float-right">
-              <i class="fa fa-angle-right"></i>
-            </span>
-          </a>
         </div>
       </div>
       <div class="col-xl-3 col-sm-6 mb-3">
@@ -103,12 +85,6 @@
             </div>
             <div class="mr-5">{{ $availableComp }} Perusahaan Tersedia!</div>
           </div>
-          <a class="card-footer text-white clearfix small z-1" href="#">
-            <span class="float-left">View Details</span>
-            <span class="float-right">
-              <i class="fa fa-angle-right"></i>
-            </span>
-          </a>
         </div>
       </div>
     </div>

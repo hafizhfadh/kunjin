@@ -33,10 +33,13 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarResponsive">
       @include('layouts.navbar')
-      @guest
-        @else
-          @include('layouts.header')
-      @endguest
+      @if (Auth::user())
+        @include('layouts.header')
+      @elseif (Auth::teacher())
+        @include('layouts.header')
+      @elseif (Auth::student())
+        @include('layouts.header')
+      @endif
       <ul class="navbar-nav sidenav-toggler">
         <li class="nav-item">
           <a class="nav-link text-center" id="sidenavToggler">

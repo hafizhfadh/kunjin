@@ -22,17 +22,17 @@ class StudentLoginController extends Controller
   {
     // Validate the form data
     $this->validate($request, [
-      'nipd' => 'required|string',
+      'id' => 'required|string',
       'password' => 'required|min:6'
     ]);
 
     // Attempt to log the user in
-    if (Auth::guard('student')->attempt(['nipd' => $request->nipd, 'password' => $request->password], $request->remember)) {
+    if (Auth::guard('student')->attempt(['id' => $request->id, 'password' => $request->password], $request->remember)) {
         // if successful, then redirect to their intended location
         return redirect()->intended(route('dashboard.index'));
     }
     // if unsuccessful, then redirect back to login form
-    return redirect()->back()->withInput($request->only('nipd', 'remember'));
+    return redirect()->back()->withInput($request->only('id', 'remember'));
   }
 
   public function logout()
