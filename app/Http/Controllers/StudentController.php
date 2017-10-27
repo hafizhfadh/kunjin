@@ -14,6 +14,20 @@ class StudentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function __construct()
+    {
+      $this->middleware('auth:student', ['except'=>['index_all', 'index', 'show']]);
+    }
+
+    public function index_all()
+    {
+      $pending = Student::select('status')->where('status', 0)->count();
+      $depart = Student::select('status')->where('status', 1)->count();
+      $availableComp = Company::select('status')->where('status', 'Belum dikunjungi')->count();
+      $requestLetter = Letter::select('status')->where('status', 'Permohonan surat')->count();
+      return view('dashboard', compact('pending', 'depart', 'availableComp', 'requestLetter'));
+    }
     public function index()
     {
         return view('student.index');

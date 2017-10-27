@@ -84,24 +84,29 @@
         <i class="fa fa-fw fa-user"></i> {{ Auth::user()->name }}
       </a>
     </li>
-  {{--  @elseif (Auth::teacher())
+    <li class="nav-item">
+      <a class="nav-link" data-toggle="modal" data-target="#exampleModal">
+        <i class="fa fa-fw fa-sign-out"></i>Logout</a>
+    </li>
+  @elseif (Auth::guard('teacher')->check())
     <li class="nav-item">
       <a href="" class="nav-link">
-        <i class="fa fa-fw fa-user"></i> {{ Auth::teacher()->name }}
+        <i class="fa fa-fw fa-user"></i> 
       </a>
-    </li>  --}}
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" data-toggle="modal" data-target="#exampleModal">
+        <i class="fa fa-fw fa-sign-out"></i>Logout</a>
+    </li>
   @elseif (Auth::guard('student')->check())
     <li class="nav-item">
       <a href="" class="nav-link">
         <i class="fa fa-fw fa-user"></i> {{ Auth::student()->name }}
       </a>
     </li>
-  @endif
-  @guest
-  @else
     <li class="nav-item">
       <a class="nav-link" data-toggle="modal" data-target="#exampleModal">
         <i class="fa fa-fw fa-sign-out"></i>Logout</a>
     </li>
-  @endguest
+  @endif
 </ul>

@@ -35,10 +35,10 @@
       @include('layouts.navbar')
       @if (Auth::guard('web')->check())
         @include('layouts.header')
-      @endif
-
-      @if (Auth::guard('student')->check())
-        @include('layouts.header')
+      @elseif (Auth::guard('teacher')->check())
+        @include ('layouts.header')
+      @elseif (Auth::guard('student')->check())
+        @include ('layouts.header')
       @endif
 
       <ul class="navbar-nav sidenav-toggler">
@@ -80,14 +80,12 @@
     <i class="fa fa-angle-up"></i>
   </a>
 
-  @guest
-  @else
     <!-- Logout Modal-->
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Ready to Leave {{ Auth::user()->name }}?</h5>
+            <h5 class="modal-title" id="exampleModalLabel">Ready to Leave ?</h5>
             <button class="close" type="button" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">×</span>
             </button>
@@ -108,7 +106,6 @@
         </div>
       </div>
     </div>
-  @endguest
 
   <!-- Bootstrap core JavaScript-->
   <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
