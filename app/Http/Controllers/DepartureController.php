@@ -70,7 +70,7 @@ class DepartureController extends Controller
         $departure = Departure::select('company_id','student_id')->get();
 
         $cdeparture = Departure::count('id')+1;
-        $surat = '2017/Hubin/Kunjin/Smk.tb/'.$cdeparture;
+        $surat = '421.5/'.$cdeparture.'/YSB/SMK.TB/Hubin/Kunjin/2017';
         $students = Student::select('id','name','class')->where('status',0)->get();
 
 
@@ -94,7 +94,7 @@ class DepartureController extends Controller
               'departure_date'=> 'required|date'
           ]);
       $departure = Departure::count('id')+1;
-      $surat = '2017/Hubin/Kunjin/Smk.tb/'.$departure;
+      $surat = '421.5/'.$departure.'/YSB/SMK.TB/Hubin/Kunjin/2017';
 
       Student::whereIn('id', $request->student_id)->update(['status'=>1]);
 
