@@ -84,13 +84,13 @@
         <i class="fa fa-fw fa-user"></i> {{ Auth::user()->name }}
       </a>
     </li>
-  @elseif (Auth::teacher())
+  {{--  @elseif (Auth::teacher())
     <li class="nav-item">
       <a href="" class="nav-link">
         <i class="fa fa-fw fa-user"></i> {{ Auth::teacher()->name }}
       </a>
-    </li>
-  @elseif (Auth::student())
+    </li>  --}}
+  @elseif (Auth::guard('student')->check())
     <li class="nav-item">
       <a href="" class="nav-link">
         <i class="fa fa-fw fa-user"></i> {{ Auth::student()->name }}
