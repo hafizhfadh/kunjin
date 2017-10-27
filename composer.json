@@ -6,13 +6,12 @@
     "type": "project",
     "require": {
         "php": ">=7.0.0",
-<<<<<<< HEAD
-=======
         "doctrine/dbal": "^2.6",
->>>>>>> e8a8e39f290ba5e127282cc8606d470c6296cc4f
         "fideloper/proxy": "~3.3",
         "laravel/framework": "5.5.*",
-        "laravel/tinker": "~1.0"
+        "laravel/tinker": "~1.0",
+        "yajra/laravel-datatables-oracle": "^8.1",
+        "maatwebsite/excel": "~2.1.0"
     },
     "require-dev": {
         "filp/whoops": "~2.0",

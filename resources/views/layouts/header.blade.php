@@ -1,4 +1,4 @@
-<ul class="navbar-nav ml-auto">
+<ul class="navbar-nav">
   <li class="nav-item dropdown">
     <a class="nav-link dropdown-toggle mr-lg-2" id="messagesDropdown" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
       <i class="fa fa-fw fa-envelope"></i>
@@ -76,20 +76,37 @@
       <a class="dropdown-item small" href="#">View all alerts</a>
     </div>
   </li>
-  <li class="nav-item">
-    <form class="form-inline my-2 my-lg-0 mr-lg-2">
-      <div class="input-group">
-        <input class="form-control" type="text" placeholder="Search for...">
-        <span class="input-group-btn">
-          <button class="btn btn-primary" type="button">
-            <i class="fa fa-search"></i>
-          </button>
-        </span>
-      </div>
-    </form>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" data-toggle="modal" data-target="#exampleModal">
-      <i class="fa fa-fw fa-sign-out"></i>Logout</a>
-  </li>
+</ul>
+<ul class="navbar-nav ml-auto">
+  @if (Auth::user())
+    <li class="nav-item">
+      <a href="" class="nav-link">
+        <i class="fa fa-fw fa-user"></i> {{ Auth::user()->name }}
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" data-toggle="modal" data-target="#exampleModal">
+        <i class="fa fa-fw fa-sign-out"></i>Logout</a>
+    </li>
+  @elseif (Auth::guard('teacher')->check())
+    <li class="nav-item">
+      <a href="" class="nav-link">
+        <i class="fa fa-fw fa-user"></i> 
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" data-toggle="modal" data-target="#exampleModal">
+        <i class="fa fa-fw fa-sign-out"></i>Logout</a>
+    </li>
+  @elseif (Auth::guard('student')->check())
+    <li class="nav-item">
+      <a href="" class="nav-link">
+        <i class="fa fa-fw fa-user"></i> {{ Auth::student()->name }}
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" data-toggle="modal" data-target="#exampleModal">
+        <i class="fa fa-fw fa-sign-out"></i>Logout</a>
+    </li>
+  @endif
 </ul>
